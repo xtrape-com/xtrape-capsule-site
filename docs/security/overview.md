@@ -62,4 +62,20 @@ Three roles in CE:
 | `operator` | Mutating actions on agents, registration tokens, services, commands. |
 | `viewer` | Read-only. |
 
+## Safe-deployment checklist
+
+Before exposing Opstage CE beyond `localhost`:
+
+- [ ] Set a strong `OPSTAGE_SESSION_SECRET` (long random string, rotated periodically).
+- [ ] Change the bootstrap admin password from the `.env.example` default.
+- [ ] Put Opstage behind HTTPS — terminate TLS at a reverse proxy and forward `X-CSRF-Token` and the session cookie.
+- [ ] **Do not expose Opstage to the public internet without an additional layer** (VPN, IP allow-list, SSO at the proxy). CE v0.1 has no built-in IP allow-list, no rate limit on the admin login, no SSO.
+- [ ] Restrict the agent token file's permissions on every agent host (`chmod 600`).
+- [ ] Keep registration tokens out of long-lived environment variables — pass them on first start only.
+- [ ] Treat `command` and `action` invocation surface as an authority boundary: every action your service exposes is something an operator can trigger remotely. Validate payloads server-side, model destructive actions with `requiresConfirmation`, and audit the result.
+- [ ] Never report secrets in [config reporting](../agents/config-reporting) — surface "configured / not configured", not the value.
+- [ ] Have a documented response plan for token leaks (revoke from the console, re-register the agent).
+
+For the future Cloud edition: customer-side secrets remain at the customer. Cloud holds inventory metadata, coarse health, declared action catalogs, and audit only.
+
 → Continue with [Token Model](./token-model) and [Agent Security](./agent-security).

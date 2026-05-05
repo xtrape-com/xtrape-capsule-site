@@ -17,20 +17,35 @@ This means the **Agent** is the active party. The Backend never needs inbound ac
 
 ## End-to-end flow
 
-```mermaid
-sequenceDiagram
-    participant A as Agent
-    participant B as Opstage Backend
-    participant U as Opstage UI
-
-    A->>B: Register with registration token
-    B-->>A: Return agent token
-    A->>B: Heartbeat
-    A->>B: Report Capsule Services
-    U->>B: View Agent and Services
-    U->>B: Request Action
-    B-->>A: Command
-    A->>B: Command Result
+```text
+   Admin creates registration token
+                 │
+                 ▼
+   Agent starts with registration token
+                 │
+                 ▼
+   Agent registers to Backend
+                 │
+                 ▼
+   Backend issues agent token
+                 │
+                 ▼
+   Agent sends heartbeats and service reports
+                 │
+                 ▼
+   Backend displays Agent and Capsule Service state
+                 │
+                 ▼
+   Operator triggers an action in the UI
+                 │
+                 ▼
+   Backend creates a command
+                 │
+                 ▼
+   Agent polls and executes the command
+                 │
+                 ▼
+   Agent reports result; Backend writes audit
 ```
 
 ## Step by step

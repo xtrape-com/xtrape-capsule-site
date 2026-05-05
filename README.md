@@ -73,6 +73,8 @@ Style guidance:
 - Concrete examples beat abstract definitions.
 - Don't expose internal naming, business strategy, or non-public roadmaps.
 
-## License
+## License and trademarks
 
-Site content is published under the same Apache-2.0 license as the platform.
+Code snippets and technical documentation in this site are licensed under **Apache-2.0**, the same license as the rest of the Xtrape Capsule repositories.
+
+**Xtrape**, **Xtrape Capsule**, **Opstage**, and related logos or marks are trademarks or planned trademarks of their respective owners. The open-source license does **not** grant trademark rights — see [docs/legal.md](./docs/legal.md) for the full statement.

@@ -47,6 +47,20 @@ Laptop / small VM:
 - Disable a worker that's misbehaving.
 - Compare config across the fleet.
 
+## CE scope
+
+- Live online/offline state for every worker, even those running on laptops or behind NAT.
+- Health that reflects browser session state (logged in / out / crashed).
+- Operator actions: `restartBrowser`, `relogin`, `rotateProxy`, `dumpScreenshot`.
+- Audit of every operator intervention.
+
+## Future EE / Cloud enhancements
+
+- Worker-pool views with rollups across many hosts.
+- Centralized log/screenshot capture for failed sessions.
+- HA Opstage so a control-plane outage never blocks worker recovery.
+- Hosted Cloud Opstage for teams running workers on personal devices.
+
 ## Next steps
 
 - [Build your first Capsule Service](../getting-started/first-capsule-service)

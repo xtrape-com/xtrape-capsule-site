@@ -34,6 +34,25 @@ features:
     linkText: Learn more
 ---
 
+::: warning Public Preview · v0.1
+Xtrape Capsule CE is currently in **v0.1 Public Preview**.
+
+**Recommended for**
+
+- local evaluation;
+- small private deployments;
+- demo Capsule Services;
+- early integration experiments.
+
+**Not recommended for**
+
+- business-critical high-availability production;
+- public-internet exposure without additional protection;
+- regulated environments requiring full compliance controls.
+
+See the [Roadmap](/roadmap) for what's planned next.
+:::
+
 ## What is Xtrape Capsule?
 
 **Xtrape Capsule** is an open governance system for the long tail of small services that power modern AI products — CAPI bridges, Playwright workers, account pools, OTP readers, proxy checkers, and AI Agent runtimes.
@@ -66,6 +85,28 @@ Opstage gives you a clear, single-pane view of every Capsule Service across your
 
 ## How it works
 
+```text
++---------------------+
+|     Opstage UI      |   ← human operator
++----------+----------+
+           |
+           v
++---------------------+
+|  Opstage Backend    |   ← control plane
++----------+----------+
+           ^
+           |  outbound only
+           |
++----------+----------+
+|  Embedded Agent     |   ← data-plane agent
++----------+----------+
+           |
+           v
++---------------------+
+|  Capsule Service    |   ← the thing being governed
++---------------------+
+```
+
 1. The administrator creates a **registration token** in Opstage.
 2. The Capsule Service starts with an embedded **Agent SDK** and registers using that token.
 3. The Agent receives a long-lived **agent token**, sends heartbeats, and reports its services.
@@ -73,15 +114,21 @@ Opstage gives you a clear, single-pane view of every Capsule Service across your
 5. Operators trigger **actions** from the UI; Opstage queues commands; the Agent polls and executes them.
 6. Every meaningful event lands in the **audit log**.
 
+The Backend never opens a socket to your services. All connections are initiated outbound by the Agent, which is what makes Opstage runnable behind NAT, on a laptop, or inside customer environments.
+
 ## Quick Start
 
 ```bash
-docker run -p 8080:8080 \
-  -v opstage-data:/app/data \
-  ghcr.io/xtrape-com/xtrape-capsule-ce:latest
+git clone https://github.com/xtrape-com/xtrape-capsule-ce.git
+cd xtrape-capsule-ce
+docker compose -f deploy/compose/docker-compose.yml up --build -d
 ```
 
 Open `http://localhost:8080` and sign in with the bootstrap admin account.
+
+::: info
+Public Docker images are planned for the v0.1.0 Public Preview release; until then, build locally with the command above.
+:::
 
 → [Full Quick Start guide](/getting-started/quick-start)
 

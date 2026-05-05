@@ -3,7 +3,7 @@
 This walks you through wiring a minimal Node.js Capsule Service into Opstage in about 10 minutes.
 
 ::: info
-The following example may need to be adjusted according to the current SDK API. The shape below tracks the public Agent SDK in `@xtrape/capsule-agent-node`.
+This guide targets the current `main` branch of [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node). When the SDK is published to npm as `@xtrape/capsule-agent-node` v0.1.x, this page will be pinned to a verified release.
 :::
 
 ## What you'll build

@@ -1,5 +1,9 @@
 # FAQ
 
+::: tip Positioning in one sentence
+Opstage is **not** a traditional config center, monitoring dashboard, or developer portal. It is an **agent-based runtime governance control plane for Capsule Services** — and it is designed to **co-exist** with whatever metrics, logs, configs, and developer-portal stack you already run.
+:::
+
 ## What is Xtrape Capsule?
 
 Xtrape Capsule is a lightweight runtime governance system for the long tail of small services that power AI products — CAPI bridges, Playwright workers, account pools, AI Agent runtimes. Services embed an [Agent SDK](./agents/node-embedded-agent), which talks to the [Opstage](./concepts/opstage) control plane: inventory, health, configs, actions, commands, and audit.
@@ -19,6 +23,17 @@ Prometheus is a **time-series metrics system**. Opstage is **not**. It tracks co
 ## How is Opstage different from Backstage?
 
 Backstage is a **developer portal** — software catalog, scaffolding, plugin platform. Opstage is a **runtime control plane** — what's running, what's healthy, what action can I trigger right now. They solve different problems and can coexist.
+
+## Can Opstage integrate with my existing stack?
+
+Yes — Opstage is intentionally narrow. It focuses on Capsule Services and leaves the rest of the platform to the tools you already use:
+
+- **Metrics:** keep using Prometheus / Grafana / DataDog. Opstage tracks coarse health, not time-series.
+- **Logs:** keep using your existing log pipeline. Opstage's audit log is an *operator-action* log, not a system log.
+- **Configs / secrets:** keep using your existing config or secret system. Opstage observes what services *report*, it does not push values.
+- **Developer portal:** keep using Backstage / your portal. Opstage links to it, doesn't replace it.
+
+Future integrations (OpenTelemetry context propagation, SIEM bridges, vault-backed secret injection in EE/Cloud) build on this stance.
 
 ## Does Opstage store my account passwords, cookies, or API tokens?
 

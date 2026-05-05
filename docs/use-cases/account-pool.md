@@ -44,6 +44,19 @@ The credentials never leave the pool service. Opstage only sees labels and count
 - Add a new account with credentials submitted via an action payload — those credentials flow to the pool service and are not persisted by Opstage.
 - Inspect command results to confirm a refresh succeeded.
 
+## CE scope
+
+- Pool size and health buckets visible at a glance.
+- Per-account label and last state — credentials stay in the pool service.
+- Operator actions: `addAccount`, `disableAccount`, `forceRefreshSession`, `clearCooldown`.
+- Audit of every add/disable/refresh.
+
+## Future EE / Cloud enhancements
+
+- Secret Vault integration so account credentials are fetched from a vault, never seen by Opstage at all.
+- Cross-pool views and quotas (e.g. minimum healthy count per region).
+- Hosted Cloud Opstage with strong tenant isolation.
+
 ## Next steps
 
 - [Token Model](../security/token-model) — why Opstage doesn't store your account secrets.

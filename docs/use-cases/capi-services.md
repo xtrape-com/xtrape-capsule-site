@@ -43,6 +43,22 @@ Make each CAPI service a Capsule Service:
 - Disable an agent (and therefore the CAPI bridge) when a vendor key is suspected leaked.
 - Show recent commands and their results inline.
 
+## CE scope
+
+In CE today you get:
+
+- live inventory of every CAPI bridge and its `effectiveStatus`,
+- health probes per bridge,
+- audited operator actions (`rotateKey`, `runHealthCheck`, etc.),
+- audited config drift between reports.
+
+## Future EE / Cloud enhancements
+
+- Secret Vault integration so vendor keys can be fetched on demand instead of pinned in env.
+- Cross-team RBAC on which bridges an operator can rotate.
+- Aggregated quota / cost views across bridges.
+- Hosted Cloud Opstage so multiple environments (dev/stage/prod) share one console.
+
 ## Next steps
 
 - [First Capsule Service](../getting-started/first-capsule-service)

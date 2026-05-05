@@ -44,6 +44,19 @@ Wrap the runtime as a Capsule Service:
 - Inject a one-off instruction (via an action with a freeform string field).
 - Cancel a stuck task; the agent reports the cancellation result back.
 
+## CE scope
+
+- Online status and last-progress timestamp.
+- Current goal / task summary, surfaced from whatever the runtime chooses to report.
+- Operator actions: `pause`, `resume`, `cancelTask`, `injectInstruction`, `dumpMemory`.
+- Audit of every operator intervention.
+
+## Future EE / Cloud enhancements
+
+- Approval workflows for high-impact actions (e.g. `injectInstruction` requires a second approver).
+- Cross-runtime rollups for fleets of agents.
+- Hosted Cloud Opstage so runtimes deployed across customer environments share one console.
+
 ## Next steps
 
 - [Action Model](../agents/action-model)

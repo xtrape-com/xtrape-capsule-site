@@ -19,7 +19,23 @@ This guide gets Opstage CE running locally in about 5 minutes.
 You do **not** need Node.js, a database server, or a reverse proxy to run Opstage CE. The container is self-contained.
 :::
 
-## Option A — Single container
+::: info Public Docker image is planned
+A public image at `ghcr.io/xtrape-com/xtrape-capsule-ce:latest` is planned for the v0.1.0 Public Preview release. Until then, the recommended path is the local Docker Compose build below.
+:::
+
+## Recommended — Docker Compose from source
+
+```bash
+git clone https://github.com/xtrape-com/xtrape-capsule-ce.git
+cd xtrape-capsule-ce
+cp .env.example .env
+# edit OPSTAGE_ADMIN_PASSWORD and OPSTAGE_SESSION_SECRET in .env
+docker compose -f deploy/compose/docker-compose.yml up --build -d
+```
+
+The compose file builds Opstage CE locally, mounts a `data` volume, and exposes port `8080`.
+
+## Once images are published — single container
 
 ```bash
 docker run -d \
@@ -30,35 +46,6 @@ docker run -d \
   -e OPSTAGE_ADMIN_PASSWORD="ChangeMeBeforeRunning123!" \
   -e OPSTAGE_SESSION_SECRET="please-rotate-this-secret" \
   ghcr.io/xtrape-com/xtrape-capsule-ce:latest
-```
-
-::: info
-Public Docker images are planned. Until they are published, build the image locally from the `xtrape-capsule-ce` repository — see [Install Opstage CE](./install-opstage-ce) for the local build path.
-:::
-
-## Option B — Docker Compose
-
-```yaml
-# docker-compose.yml
-services:
-  opstage:
-    image: ghcr.io/xtrape-com/xtrape-capsule-ce:latest
-    ports:
-      - "8080:8080"
-    environment:
-      OPSTAGE_ADMIN_USERNAME: "admin@example.local"
-      OPSTAGE_ADMIN_PASSWORD: "ChangeMeBeforeRunning123!"
-      OPSTAGE_SESSION_SECRET: "please-rotate-this-secret"
-    volumes:
-      - opstage-data:/app/data
-    restart: unless-stopped
-
-volumes:
-  opstage-data:
-```
-
-```bash
-docker compose up -d
 ```
 
 ## Default access

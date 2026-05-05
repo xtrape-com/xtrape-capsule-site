@@ -51,6 +51,7 @@ export default defineConfig({
             { text: "Quick Start", link: "/getting-started/quick-start" },
             { text: "Install Opstage CE", link: "/getting-started/install-opstage-ce" },
             { text: "First Capsule Service", link: "/getting-started/first-capsule-service" },
+            { text: "Demo", link: "/getting-started/demo" },
           ],
         },
       ],
@@ -141,7 +142,9 @@ export default defineConfig({
     search: { provider: "local" },
 
     footer: {
-      message: "Released under the Apache-2.0 License.",
+      message:
+        'Code and docs released under <a href="/xtrape-capsule-site/legal">Apache-2.0</a>. ' +
+        '"Xtrape", "Xtrape Capsule", and "Opstage" are trademarks of their respective owners.',
       copyright: "Copyright © Xtrape",
     },
 

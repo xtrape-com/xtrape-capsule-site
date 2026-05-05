@@ -1,0 +1,16 @@
+{
+  "name": "xtrape-capsule-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Public website and documentation for Xtrape Capsule.",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.5.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

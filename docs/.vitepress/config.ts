@@ -3,6 +3,7 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Xtrape Capsule",
   description: "A lightweight control plane for AI-era Capsule Services.",
+  base: "/xtrape-capsule-site/",
   cleanUrls: true,
   lastUpdated: true,
   ignoreDeadLinks: true,

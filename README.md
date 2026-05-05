@@ -47,7 +47,7 @@ docs/
 ├── opstage-ce/              # CE-specific deployment, configuration, admin UI, backup
 ├── agents/                  # agent SDK pages
 ├── contracts/               # contract-level reference
-├── use-cases/               # CAPI / Playwright / account pool / AI agent runtime
+├── use-cases/               # integration services / Playwright workers / account pool / AI agent runtime
 ├── editions/                # CE / EE / Cloud
 ├── security/                # token model, agent security, overview
 ├── roadmap.md

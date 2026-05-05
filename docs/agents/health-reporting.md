@@ -17,7 +17,7 @@ Health is a coarse, operator-facing signal — not a metrics system. Each Capsul
 ## Declaring a health check (Node SDK)
 
 ```ts
-agent.registerHealthCheck("capi-chatgpt", async () => {
+agent.registerHealthCheck("integration-worker", async () => {
   try {
     await fetch(process.env.UPSTREAM_URL!, { method: "HEAD" });
     return { status: "HEALTHY" };

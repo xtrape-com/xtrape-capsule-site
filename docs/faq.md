@@ -6,7 +6,7 @@ Opstage is **not** a traditional config center, monitoring dashboard, or develop
 
 ## What is Xtrape Capsule?
 
-Xtrape Capsule is a lightweight runtime governance system for the long tail of small services that power AI products — CAPI bridges, Playwright workers, account pools, AI Agent runtimes. Services embed an [Agent SDK](./agents/node-embedded-agent), which talks to the [Opstage](./concepts/opstage) control plane: inventory, health, configs, actions, commands, and audit.
+Xtrape Capsule is a lightweight runtime governance system for the long tail of small services that power AI products — integration adapters, Playwright workers, account pools, AI Agent runtimes. Services embed an [Agent SDK](./agents/node-embedded-agent), which talks to the [Opstage](./concepts/opstage) control plane: inventory, health, configs, actions, commands, and audit.
 
 ## What's the difference between a Capsule Service and a microservice?
 

@@ -29,7 +29,7 @@ export default defineConfig({
       { text: "Opstage CE", link: "/opstage-ce/overview" },
       { text: "Agents", link: "/agents/node-embedded-agent" },
       { text: "Contracts", link: "/contracts/overview" },
-      { text: "Use Cases", link: "/use-cases/capi-services" },
+      { text: "Use Cases", link: "/use-cases/integration-services" },
       { text: "Editions", link: "/editions/ce" },
       { text: "Roadmap", link: "/roadmap" },
       {
@@ -106,7 +106,7 @@ export default defineConfig({
         {
           text: "Use Cases",
           items: [
-            { text: "CAPI Services", link: "/use-cases/capi-services" },
+            { text: "Integration Services", link: "/use-cases/integration-services" },
             { text: "Playwright Workers", link: "/use-cases/playwright-workers" },
             { text: "Account Pool", link: "/use-cases/account-pool" },
             { text: "AI Agent Runtime", link: "/use-cases/ai-agent-runtime" },

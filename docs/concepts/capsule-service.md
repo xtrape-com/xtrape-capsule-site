@@ -31,7 +31,7 @@ Capsule Services are designed to fill that gap.
 
 AI products tend to multiply small, specialized runtimes:
 
-- **CAPI bridges** translating between vendor APIs and your internal contracts;
+- **Integration adapters** translating between vendor APIs and your internal contracts;
 - **Playwright workers** that drive a browser session per task;
 - **Account pools** that own a credential, a cookie jar, or an OTP reader;
 - **AI Agent runtimes** — long-lived loops that need observable state and safe operator controls;
@@ -41,7 +41,7 @@ A typical AI product ends up with **dozens** of these. Each is too small to dese
 
 ## Typical examples
 
-- CAPI Service — fronts a vendor API with a stable internal contract
+- Integration service — fronts an external API with a stable internal contract
 - Playwright Worker — runs a browser session, often with credentials
 - Account Pool — owns and rotates accounts/cookies
 - Session Pool — owns long-lived authenticated sessions

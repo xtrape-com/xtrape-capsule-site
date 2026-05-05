@@ -21,7 +21,7 @@ CE is the **open-source self-hosted** edition of Opstage. It is the right starti
 ## Who CE is for
 
 - An individual developer running a few Capsule Services on a laptop or VM.
-- A small team operating a private fleet (CAPI bridges, Playwright workers, account pools).
+- A small team operating a private fleet (integration adapters, Playwright workers, account pools).
 - Anyone evaluating Capsule before committing to EE/Cloud.
 
 ## Limitations (by design)

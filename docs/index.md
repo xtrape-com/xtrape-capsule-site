@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Xtrape Capsule
   text: A lightweight control plane for AI-era Capsule Services.
-  tagline: Connect small services, automation workers, CAPI services, and agent runtimes to a unified Opstage console through an embedded Agent SDK.
+  tagline: Connect small services, automation workers, integration services, and agent runtimes to a unified Opstage console through an embedded Agent SDK.
   actions:
     - theme: brand
       text: Get Started
@@ -55,7 +55,7 @@ See the [Roadmap](/roadmap) for what's planned next.
 
 ## What is Xtrape Capsule?
 
-**Xtrape Capsule** is an open governance system for the long tail of small services that power modern AI products — CAPI bridges, Playwright workers, account pools, OTP readers, proxy checkers, and AI Agent runtimes.
+**Xtrape Capsule** is an open governance system for the long tail of small services that power modern AI products — integration adapters, Playwright workers, account pools, OTP readers, proxy checkers, and AI Agent runtimes.
 
 Instead of stitching together a service mesh, a config center, a monitoring stack, and a backstage, you get **one lightweight control plane** that speaks to your services through an embedded Agent.
 
@@ -166,7 +166,7 @@ await agent.start();
 
 ## Use Cases
 
-- [CAPI Services](/use-cases/capi-services)
+- [Integration Services](/use-cases/integration-services)
 - [Playwright Workers](/use-cases/playwright-workers)
 - [Account Pool](/use-cases/account-pool)
 - [AI Agent Runtime](/use-cases/ai-agent-runtime)

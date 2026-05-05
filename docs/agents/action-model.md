@@ -23,7 +23,7 @@ POST  /api/admin/capsule-services/:serviceId/actions/:actionName    # execute
 ## Declaring an action (Node SDK)
 
 ```ts
-agent.registerAction("capi-chatgpt", {
+agent.registerAction("integration-worker", {
   name: "rotateKey",
   label: "Rotate API key",
   requiresConfirmation: true,
@@ -35,7 +35,7 @@ agent.registerAction("capi-chatgpt", {
   prepare: async () => ({
     inputSchema: { /* override or refine the catalog schema */ },
     initialPayload: { newKey: "" },
-    currentState: { service: { code: "capi-chatgpt", status: "HEALTHY" } },
+    currentState: { service: { code: "integration-worker", status: "HEALTHY" } },
   }),
   handler: async (payload) => {
     await rotate(payload.newKey);

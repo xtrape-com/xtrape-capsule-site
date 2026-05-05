@@ -15,7 +15,7 @@ Observing instead means:
 ## Declaring a config source (Node SDK)
 
 ```ts
-agent.registerConfigSource("capi-chatgpt", async () => ({
+agent.registerConfigSource("integration-worker", async () => ({
   upstream: process.env.UPSTREAM_URL,
   timeoutMs: Number(process.env.UPSTREAM_TIMEOUT_MS ?? 15000),
   modelDefault: process.env.MODEL_DEFAULT ?? "gpt-4o-mini",

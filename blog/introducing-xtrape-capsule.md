@@ -2,13 +2,13 @@
 
 > *Published with the v0.1 Public Preview.*
 
-Modern AI products quietly accumulate dozens of small services: CAPI bridges, Playwright workers, account pools, OTP readers, AI Agent runtimes. They are too small for a service mesh and too important to leave unmanaged. **Xtrape Capsule** is built for that gap.
+Modern AI products quietly accumulate dozens of small services: integration adapters, Playwright workers, account pools, OTP readers, AI Agent runtimes. They are too small for a service mesh and too important to leave unmanaged. **Xtrape Capsule** is built for that gap.
 
 ## The shape of the problem
 
 Pick any AI product mid-development and look at what's actually running:
 
-- A handful of CAPI bridges in front of OpenAI / Anthropic / vendor-X.
+- A handful of integration adapters in front of OpenAI / Anthropic / vendor-X.
 - A pool of Playwright workers, each holding a logged-in session.
 - A pool of accounts, each with a credential and a state.
 - One or two AI Agent runtimes, looping with tools and memory.

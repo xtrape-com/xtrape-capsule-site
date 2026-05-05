@@ -8,7 +8,7 @@ The **Node Embedded Agent** is a small library you import directly into your Nod
 
 ## When to use it
 
-Use the embedded agent when your service is itself a Node.js process — a CAPI bridge, a Playwright worker, an AI Agent runtime, or any worker you can `import` into.
+Use the embedded agent when your service is itself a Node.js process — an integration adapter, a Playwright worker, an AI Agent runtime, or any worker you can `import` into.
 
 For non-Node services, run the Node agent as a sidecar process or use a future language-specific agent.
 
@@ -30,8 +30,8 @@ const agent = new CapsuleAgent({
 });
 
 agent.registerService({
-  code: "capi-chatgpt",
-  name: "ChatGPT CAPI",
+  code: "integration-worker",
+  name: "Example integration service",
   version: "0.3.1",
 });
 
@@ -43,7 +43,7 @@ await agent.start();
 ## Health reporting
 
 ```ts
-agent.registerHealthCheck("capi-chatgpt", async () => {
+agent.registerHealthCheck("integration-worker", async () => {
   const ok = await ping();
   return ok
     ? { status: "HEALTHY" }
@@ -56,7 +56,7 @@ Health is sampled on the heartbeat cadence and surfaced in the Opstage console. 
 ## Config reporting
 
 ```ts
-agent.registerConfigSource("capi-chatgpt", async () => ({
+agent.registerConfigSource("integration-worker", async () => ({
   upstream: process.env.UPSTREAM_URL,
   timeoutMs: Number(process.env.UPSTREAM_TIMEOUT_MS ?? 15000),
 }));
@@ -67,7 +67,7 @@ Configuration is **observed**, not pushed. The service remains the source of tru
 ## Action model
 
 ```ts
-agent.registerAction("capi-chatgpt", {
+agent.registerAction("integration-worker", {
   name: "rotateKey",
   label: "Rotate API key",
   requiresConfirmation: true,

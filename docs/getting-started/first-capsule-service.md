@@ -33,9 +33,17 @@ In the Opstage console:
 ```bash
 mkdir my-capsule && cd my-capsule
 pnpm init
-pnpm add @xtrape/capsule-agent-node
 pnpm add -D typescript tsx @types/node
 ```
+
+::: warning SDK install path
+`@xtrape/capsule-agent-node` is **not yet published to npm**. Until the v0.1.0 Public Preview, link it from a local checkout of [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node), or run your service from inside the [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace where the package is already wired up. After the package is published, the install command will be:
+
+```bash
+pnpm add @xtrape/capsule-agent-node
+```
+
+:::
 
 `tsconfig.json`:
 
@@ -64,42 +72,52 @@ import { CapsuleAgent } from "@xtrape/capsule-agent-node";
 const agent = new CapsuleAgent({
   backendUrl: process.env.OPSTAGE_BACKEND_URL ?? "http://localhost:8080",
   registrationToken: process.env.OPSTAGE_REGISTRATION_TOKEN,
-  tokenFile: process.env.OPSTAGE_AGENT_TOKEN_FILE ?? "./data/agent-token.json",
+  tokenStore: { file: process.env.OPSTAGE_AGENT_TOKEN_FILE ?? "./data/agent-token.txt" },
+  service: {
+    code: "my-capsule",
+    name: "My Capsule Service",
+    version: "0.1.0",
+    runtime: "nodejs",
+    description: "A minimal Capsule Service used as a Hello-World example.",
+  },
 });
 
-// 4a. Declare a Capsule Service manifest
-agent.registerService({
-  code: "my-capsule",
-  name: "My Capsule Service",
-  version: "0.1.0",
-  description: "A minimal Capsule Service used as a Hello-World example.",
-});
-
-// 4b. Health reporting
-agent.registerHealthCheck("my-capsule", async () => {
-  // run any check that proves the service is alive
-  return { status: "HEALTHY", message: "ok" };
-});
-
-// 4c. Config reporting (optional)
-agent.registerConfigSource("my-capsule", async () => ({
-  greeting: process.env.GREETING ?? "hello",
+// Health reporting
+agent.health(async () => ({
+  status: "UP",
+  message: "ok",
+  details: { uptimeSeconds: Math.floor(process.uptime()) },
 }));
 
-// 4d. Action — server-callable operation
-agent.registerAction("my-capsule", {
+// Config reporting (optional)
+agent.configs(() => [
+  {
+    key: "GREETING",
+    type: "string",
+    sensitive: false,
+    editable: false,
+    valuePreview: process.env.GREETING ?? "hello",
+  },
+]);
+
+// Action — server-callable operation
+agent.action({
   name: "echo",
   label: "Echo",
+  description: "Return the submitted message.",
+  dangerLevel: "LOW",
+  requiresConfirmation: false,
   inputSchema: {
     type: "object",
     required: ["message"],
     properties: {
-      message: { type: "string" },
+      message: { type: "string", default: "hello" },
     },
   },
-  handler: async (payload) => {
-    return { echoed: payload.message };
-  },
+  handler: async (payload) => ({
+    success: true,
+    data: { echo: payload.message },
+  }),
 });
 
 await agent.start();

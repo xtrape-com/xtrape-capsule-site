@@ -1,6 +1,13 @@
 # xtrape-capsule-site
 
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./docs/legal.md)
+[![Status: Public Preview](https://img.shields.io/badge/status-v0.1%20Public%20Preview-orange.svg)](https://xtrape-com.github.io/xtrape-capsule-site/roadmap)
+[![Live site](https://img.shields.io/badge/site-xtrape--com.github.io-blue.svg)](https://xtrape-com.github.io/xtrape-capsule-site/)
+[![Built with VitePress](https://img.shields.io/badge/built%20with-vitepress-646cff.svg)](https://vitepress.dev/)
+
 Public website and documentation for **Xtrape Capsule** — a lightweight control plane for AI-era Capsule Services.
+
+🌐 Live site: <https://xtrape-com.github.io/xtrape-capsule-site/>
 
 This is the public docs site. Source for the platform itself lives in:
 

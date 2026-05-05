@@ -2,9 +2,23 @@
 
 Opstage CE is designed to run as a **single container** with a SQLite volume. This page covers the production-style deployment paths.
 
-## Single image
+::: warning Public images are not yet published
+The Docker image at `ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` is planned for the v0.1.0 Public Preview release. **Until then, build locally with the Compose path below.** Snippets that reference `ghcr.io/...` further down this page work only after the image is published.
+:::
 
-The container bundles the Fastify backend, the built React UI, and a SQLite database under `/app/data`.
+## Build and run from source (current path)
+
+```bash
+git clone https://github.com/xtrape-com/xtrape-capsule-ce.git
+cd xtrape-capsule-ce
+cp .env.example .env
+# edit OPSTAGE_ADMIN_PASSWORD and OPSTAGE_SESSION_SECRET in .env
+docker compose -f deploy/compose/docker-compose.yml up --build -d
+```
+
+The compose file builds the image locally, mounts a `data` volume, and exposes port `8080`.
+
+## Single image (once published)
 
 ```bash
 docker run -d \
@@ -14,20 +28,16 @@ docker run -d \
   -e OPSTAGE_ADMIN_USERNAME="admin@example.local" \
   -e OPSTAGE_ADMIN_PASSWORD="ChangeMeBeforeRunning123!" \
   -e OPSTAGE_SESSION_SECRET="rotate-me" \
-  ghcr.io/xtrape-com/xtrape-capsule-ce:latest
+  ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0
 ```
 
-::: info
-Public images are planned. Until then, build locally from the `xtrape-capsule-ce` repo: `docker compose -f deploy/compose/docker-compose.yml up --build -d`.
-:::
-
-## Docker Compose
+## Docker Compose against a published image
 
 ```yaml
 # docker-compose.yml
 services:
   opstage:
-    image: ghcr.io/xtrape-com/xtrape-capsule-ce:latest
+    image: ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0
     ports:
       - "8080:8080"
     environment:

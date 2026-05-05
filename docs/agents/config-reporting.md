@@ -12,17 +12,45 @@ Observing instead means:
 - the audit trail records when reported config changed;
 - Opstage stays out of the path of secret distribution.
 
-## Declaring a config source (Node SDK)
+## Declaring a config provider (Node SDK)
+
+The provider returns an array of config items — typed metadata, not arbitrary JSON. Each item carries a `key`, `type`, sensitivity flags, and an optional `valuePreview`:
 
 ```ts
-agent.registerConfigSource("integration-worker", async () => ({
-  upstream: process.env.UPSTREAM_URL,
-  timeoutMs: Number(process.env.UPSTREAM_TIMEOUT_MS ?? 15000),
-  modelDefault: process.env.MODEL_DEFAULT ?? "gpt-4o-mini",
-}));
+agent.configs(() => [
+  {
+    key: "UPSTREAM_URL",
+    type: "string",
+    sensitive: false,
+    editable: false,
+    valuePreview: process.env.UPSTREAM_URL,
+  },
+  {
+    key: "UPSTREAM_TIMEOUT_MS",
+    type: "number",
+    sensitive: false,
+    editable: false,
+    valuePreview: String(process.env.UPSTREAM_TIMEOUT_MS ?? 15000),
+  },
+  {
+    key: "MODEL_DEFAULT",
+    type: "string",
+    sensitive: false,
+    editable: false,
+    valuePreview: process.env.MODEL_DEFAULT ?? "gpt-4o-mini",
+  },
+  {
+    key: "UPSTREAM_API_KEY",
+    type: "secret",
+    sensitive: true,
+    editable: false,
+    valuePreview: "[REDACTED]",
+    secretRef: "env://UPSTREAM_API_KEY",
+  },
+]);
 ```
 
-The function is called when the agent prepares a service report. Returned values are sent verbatim.
+The provider is called when the agent prepares a service report. Mark secret-bearing keys with `sensitive: true` and never put their values in `valuePreview`.
 
 ## What to report — and what not to
 

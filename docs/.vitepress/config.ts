@@ -32,6 +32,7 @@ export default defineConfig({
       { text: "Use Cases", link: "/use-cases/integration-services" },
       { text: "Editions", link: "/editions/ce" },
       { text: "Roadmap", link: "/roadmap" },
+      { text: "v0.1.0", link: "/releases/v0.1.0" },
       {
         text: "GitHub",
         items: [

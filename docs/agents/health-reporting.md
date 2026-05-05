@@ -4,36 +4,37 @@ Health is a coarse, operator-facing signal — not a metrics system. Each Capsul
 
 ## Health states
 
+The agent reports one of these `status` values:
+
 | State | Meaning |
 | --- | --- |
-| `HEALTHY` | The service believes it can do its job right now. |
-| `UNHEALTHY` | The service cannot do its job (e.g. upstream unreachable). |
+| `UP` | The service believes it can do its job right now. |
+| `DEGRADED` | The service is up but partially impaired (slow upstream, retries climbing). |
+| `DOWN` | The service cannot do its job (e.g. upstream unreachable). |
 | `UNKNOWN` | The service has not yet computed a health value. |
-| (derived) `STALE` | The service has not reported recently. |
-| (derived) `OFFLINE` | The owning agent is offline. |
 
-`STALE` and `OFFLINE` are computed by the backend, not reported by the agent.
+The Opstage backend folds these together with agent state and report freshness into a single `effectiveStatus`: `HEALTHY` / `UNHEALTHY` / `STALE` / `OFFLINE` / `UNKNOWN`. `STALE` and `OFFLINE` are not reported by the agent.
 
-## Declaring a health check (Node SDK)
+## Declaring a health provider (Node SDK)
 
 ```ts
-agent.registerHealthCheck("integration-worker", async () => {
+agent.health(async () => {
   try {
     await fetch(process.env.UPSTREAM_URL!, { method: "HEAD" });
-    return { status: "HEALTHY" };
+    return { status: "UP" };
   } catch (err) {
-    return { status: "UNHEALTHY", message: String(err) };
+    return { status: "DOWN", message: String(err) };
   }
 });
 ```
 
-The check runs on the heartbeat cadence; the result is reported with the next service report.
+The provider runs on the heartbeat cadence; the result is reported with the next heartbeat and the next service report.
 
 ## Optional fields
 
 ```ts
 return {
-  status: "HEALTHY",
+  status: "UP",
   message: "ok",            // short human-readable summary
   details: {                // arbitrary JSON, surfaced in the UI Health tab
     upstreamLatencyMs: 42,

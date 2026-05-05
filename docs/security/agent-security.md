@@ -38,32 +38,39 @@ The Agent SDK only initiates outbound HTTPS requests. There is no listener.
 Config reporting is a developer's eye view of "what config am I running with". Make it useful — but never include secrets.
 
 ```ts
-// 👍 OK
-agent.registerConfigSource("svc", async () => ({
-  upstream: process.env.UPSTREAM_URL,
-  modelDefault: process.env.MODEL,
-}));
+// 👍 OK — preview is a non-secret display string
+agent.configs(() => [
+  { key: "UPSTREAM_URL", type: "string", sensitive: false, editable: false,
+    valuePreview: process.env.UPSTREAM_URL },
+  { key: "MODEL", type: "string", sensitive: false, editable: false,
+    valuePreview: process.env.MODEL },
+  { key: "API_KEY", type: "secret", sensitive: true, editable: false,
+    valuePreview: "[REDACTED]", secretRef: "env://API_KEY" },
+]);
 
-// 🚫 Never
-agent.registerConfigSource("svc", async () => ({
-  apiKey: process.env.API_KEY,    // <-- don't
-  cookieJar: cookies.toString(),  // <-- don't
-}));
+// 🚫 Never — putting secret material in valuePreview
+agent.configs(() => [
+  { key: "API_KEY", type: "secret", sensitive: true, editable: false,
+    valuePreview: process.env.API_KEY },  // <-- don't
+]);
 ```
 
-Opstage operators should never see plaintext secrets in any tab.
+Opstage operators should never see plaintext secrets in any tab. Mark every secret-bearing key with `sensitive: true` and use `[REDACTED]` (or a similar non-revealing placeholder) for `valuePreview`.
 
 ## Validate action payloads server-side
 
 Opstage validates payloads against the schema you declared, but your handler is the last line of defense. Never trust the payload blindly:
 
 ```ts
-agent.registerAction("svc", {
+agent.action({
   name: "rotateKey",
   inputSchema: { /* ... */ },
   handler: async (payload) => {
-    if (!isStrongKey(payload.newKey)) throw new Error("weak key");
-    await rotate(payload.newKey);
+    if (!isStrongKey(payload.newKey as string)) {
+      return { success: false, error: { code: "WEAK_KEY", message: "key too weak" } };
+    }
+    await rotate(payload.newKey as string);
+    return { success: true };
   },
 });
 ```

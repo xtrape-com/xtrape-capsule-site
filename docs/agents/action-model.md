@@ -23,28 +23,29 @@ POST  /api/admin/capsule-services/:serviceId/actions/:actionName    # execute
 ## Declaring an action (Node SDK)
 
 ```ts
-agent.registerAction("integration-worker", {
+agent.action({
   name: "rotateKey",
   label: "Rotate API key",
+  dangerLevel: "HIGH",
   requiresConfirmation: true,
+  timeoutSeconds: 30,
   inputSchema: {
     type: "object",
     required: ["newKey"],
     properties: { newKey: { type: "string", minLength: 8 } },
   },
   prepare: async () => ({
-    inputSchema: { /* override or refine the catalog schema */ },
     initialPayload: { newKey: "" },
     currentState: { service: { code: "integration-worker", status: "HEALTHY" } },
   }),
   handler: async (payload) => {
-    await rotate(payload.newKey);
-    return { rotatedAt: new Date().toISOString() };
+    await rotate(payload.newKey as string);
+    return { success: true, data: { rotatedAt: new Date().toISOString() } };
   },
 });
 ```
 
-`prepare` is optional. If omitted, the agent returns the catalog `inputSchema` as-is and an empty `initialPayload`.
+`prepare` is optional. If omitted, the SDK returns a default prepare payload built from the catalog `inputSchema` defaults.
 
 ## Confirmation
 

@@ -14,6 +14,10 @@ For non-Node services, run the Node agent as a sidecar process or use a future l
 
 ## Install
 
+::: warning Not yet on npm
+`@xtrape/capsule-agent-node` is not yet published to npm. Until the v0.1.0 Public Preview, link it from the [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node) repo or use it from the [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace. After publishing:
+:::
+
 ```bash
 pnpm add @xtrape/capsule-agent-node
 ```
@@ -26,28 +30,28 @@ import { CapsuleAgent } from "@xtrape/capsule-agent-node";
 const agent = new CapsuleAgent({
   backendUrl: process.env.OPSTAGE_BACKEND_URL!,
   registrationToken: process.env.OPSTAGE_REGISTRATION_TOKEN,
-  tokenFile: "./data/agent-token.json",
-});
-
-agent.registerService({
-  code: "integration-worker",
-  name: "Example integration service",
-  version: "0.3.1",
+  tokenStore: { file: "./data/agent-token.txt" },
+  service: {
+    code: "integration-worker",
+    name: "Example integration service",
+    version: "0.3.1",
+    runtime: "nodejs",
+  },
 });
 
 await agent.start();
 ```
 
-`registrationToken` is required only on first start. After the agent token has been persisted to `tokenFile`, restarting the process just re-uses it.
+`registrationToken` is required only on first start. After the agent token has been persisted to `tokenStore.file`, restarting the process just re-uses it.
 
 ## Health reporting
 
 ```ts
-agent.registerHealthCheck("integration-worker", async () => {
+agent.health(async () => {
   const ok = await ping();
   return ok
-    ? { status: "HEALTHY" }
-    : { status: "UNHEALTHY", message: "vendor API unreachable" };
+    ? { status: "UP" }
+    : { status: "DOWN", message: "vendor API unreachable" };
 });
 ```
 
@@ -56,10 +60,22 @@ Health is sampled on the heartbeat cadence and surfaced in the Opstage console. 
 ## Config reporting
 
 ```ts
-agent.registerConfigSource("integration-worker", async () => ({
-  upstream: process.env.UPSTREAM_URL,
-  timeoutMs: Number(process.env.UPSTREAM_TIMEOUT_MS ?? 15000),
-}));
+agent.configs(() => [
+  {
+    key: "UPSTREAM_URL",
+    type: "string",
+    sensitive: false,
+    editable: false,
+    valuePreview: process.env.UPSTREAM_URL,
+  },
+  {
+    key: "UPSTREAM_TIMEOUT_MS",
+    type: "number",
+    sensitive: false,
+    editable: false,
+    valuePreview: String(process.env.UPSTREAM_TIMEOUT_MS ?? 15000),
+  },
+]);
 ```
 
 Configuration is **observed**, not pushed. The service remains the source of truth. See [Config Reporting](./config-reporting).
@@ -67,9 +83,10 @@ Configuration is **observed**, not pushed. The service remains the source of tru
 ## Action model
 
 ```ts
-agent.registerAction("integration-worker", {
+agent.action({
   name: "rotateKey",
   label: "Rotate API key",
+  dangerLevel: "HIGH",
   requiresConfirmation: true,
   inputSchema: {
     type: "object",
@@ -77,8 +94,8 @@ agent.registerAction("integration-worker", {
     properties: { newKey: { type: "string", minLength: 8 } },
   },
   handler: async (payload) => {
-    await rotate(payload.newKey);
-    return { rotatedAt: new Date().toISOString() };
+    await rotate(payload.newKey as string);
+    return { success: true, data: { rotatedAt: new Date().toISOString() } };
   },
 });
 ```
@@ -92,7 +109,7 @@ The agent maintains a long-poll against `GET /api/agents/commands` and dispatche
 ## Security notes
 
 - Treat the registration token like a one-time secret. After first start, **do not** keep it in the environment.
-- Persist `agent-token.json` with restrictive file permissions (`chmod 600`).
+- Persist the agent token file with restrictive file permissions (`chmod 600`).
 - The agent only makes **outbound** connections; you do not need to expose any inbound port to Opstage.
 - A leaked agent token can be revoked from the Opstage console — see [Token Model](../security/token-model).
 

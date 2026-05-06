@@ -39,8 +39,8 @@ features:
     linkText: Learn more
 ---
 
-::: warning Public Review · pre-v0.1 Public Preview Xtrape Capsule is currently
-in **Public Review** before the `v0.1.0 Public Preview` release.
+::: warning Public Review
+Xtrape Capsule is currently in **Public Review** before the `v0.1.0 Public Preview` release.
 
 APIs, contracts, deployment instructions, and SDK interfaces may still change.
 
@@ -57,7 +57,8 @@ APIs, contracts, deployment instructions, and SDK interfaces may still change.
 - public-internet exposure without additional protection;
 - regulated environments requiring full compliance controls.
 
-See the [Roadmap](/roadmap) for what's planned next. :::
+See the [Roadmap](/roadmap) for what's planned next.
+:::
 
 ## What is Xtrape Capsule?
 

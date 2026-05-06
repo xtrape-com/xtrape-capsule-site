@@ -5,15 +5,19 @@
 [![Live site](https://img.shields.io/badge/site-xtrape--com.github.io-blue.svg)](https://xtrape-com.github.io/xtrape-capsule-site/)
 [![Built with VitePress](https://img.shields.io/badge/built%20with-vitepress-646cff.svg)](https://vitepress.dev/)
 
-Public website and documentation for **Xtrape Capsule** — a lightweight control plane for AI-era Capsule Services.
+Public website and documentation for **Xtrape Capsule** — a lightweight control
+plane for AI-era Capsule Services.
 
 🌐 Live site: <https://xtrape-com.github.io/xtrape-capsule-site/>
 
 This is the public docs site. Source for the platform itself lives in:
 
-- [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) — Opstage CE (backend, UI, deploy)
-- [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node) — Node embedded Agent SDK
-- [`xtrape-capsule-contracts-node`](https://github.com/xtrape-com/xtrape-capsule-contracts-node) — Shared Zod / TS contracts
+- [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) —
+  Opstage CE (backend, UI, deploy)
+- [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node)
+  — Node embedded Agent SDK
+- [`xtrape-capsule-contracts-node`](https://github.com/xtrape-com/xtrape-capsule-contracts-node)
+  — Shared Zod / TS contracts
 
 ## Stack
 
@@ -35,7 +39,9 @@ pnpm docs:preview      # serve the built site locally
 
 ## Deploy
 
-The site is deployed by the GitHub Actions workflow in `.github/workflows/deploy.yml`. Pushing to `main` rebuilds and publishes to GitHub Pages.
+The site is deployed by the GitHub Actions workflow in
+`.github/workflows/deploy.yml`. Pushing to `main` rebuilds and publishes to
+GitHub Pages.
 
 To deploy manually:
 
@@ -82,6 +88,10 @@ Style guidance:
 
 ## License and trademarks
 
-Code snippets and technical documentation in this site are licensed under **Apache-2.0**, the same license as the rest of the Xtrape Capsule repositories.
+Code snippets and technical documentation in this site are licensed under
+**Apache-2.0**, the same license as the rest of the Xtrape Capsule repositories.
 
-**Xtrape**, **Xtrape Capsule**, **Opstage**, and related logos or marks are trademarks or planned trademarks of their respective owners. The open-source license does **not** grant trademark rights — see [docs/legal.md](./docs/legal.md) for the full statement.
+**Xtrape**, **Xtrape Capsule**, **Opstage**, and related logos or marks are
+trademarks or planned trademarks of their respective owners. The open-source
+license does **not** grant trademark rights — see
+[docs/legal.md](./docs/legal.md) for the full statement.

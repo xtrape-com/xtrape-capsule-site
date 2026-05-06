@@ -1,22 +1,32 @@
 # Node Embedded Agent
 
-The **Node Embedded Agent** is a small library you import directly into your Node.js Capsule Service. It speaks the Capsule Management Contract to the Opstage backend on your behalf.
+The **Node Embedded Agent** is a small library you import directly into your
+Node.js Capsule Service. It speaks the Capsule Management Contract to the
+Opstage backend on your behalf.
 
-- Repository: [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node)
+- Repository:
+  [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node)
 - Package: `@xtrape/capsule-agent-node`
 - Runtime: Node.js 18+
 
 ## When to use it
 
-Use the embedded agent when your service is itself a Node.js process — an integration adapter, a Playwright worker, an AI Agent runtime, or any worker you can `import` into.
+Use the embedded agent when your service is itself a Node.js process — an
+integration adapter, a Playwright worker, an AI Agent runtime, or any worker you
+can `import` into.
 
-Other runtimes can integrate through custom wrappers today, while dedicated sidecar and standalone agents are planned on the roadmap.
+Other runtimes can integrate through custom wrappers today, while dedicated
+sidecar and standalone agents are planned on the roadmap.
 
 ## Install
 
-::: warning Not yet on npm
-`@xtrape/capsule-agent-node` is not yet published to npm. During Public Review, link it from the [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node) repo or use it from the [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace. After publishing, this page will include the pinned npm install command.
-:::
+::: warning Not yet on npm `@xtrape/capsule-agent-node` is not yet published to
+npm. During Public Review, link it from the
+[`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node)
+repo or use it from the
+[`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce)
+workspace. After publishing, this page will include the pinned npm install
+command. :::
 
 ## Minimal example
 
@@ -38,7 +48,8 @@ const agent = new CapsuleAgent({
 await agent.start();
 ```
 
-`registrationToken` is required only on first start. After the agent token has been persisted to `tokenStore.file`, restarting the process just re-uses it.
+`registrationToken` is required only on first start. After the agent token has
+been persisted to `tokenStore.file`, restarting the process just re-uses it.
 
 ## Health reporting
 
@@ -51,11 +62,14 @@ agent.health(async () => {
 });
 ```
 
-Health is sampled on the heartbeat cadence and surfaced in the Opstage console. See [Health Reporting](./health-reporting).
+Health is sampled on the heartbeat cadence and surfaced in the Opstage console.
+See [Health Reporting](./health-reporting).
 
-Agent health providers return protocol-level `HealthStatus` values: `UP`, `DEGRADED`, `DOWN`, `UNKNOWN`.
+Agent health providers return protocol-level `HealthStatus` values: `UP`,
+`DEGRADED`, `DOWN`, `UNKNOWN`.
 
-Opstage may derive an operator-facing `effectiveStatus`: `HEALTHY`, `UNHEALTHY`, `STALE`, `OFFLINE`.
+Opstage may derive an operator-facing `effectiveStatus`: `HEALTHY`, `UNHEALTHY`,
+`STALE`, `OFFLINE`.
 
 ## Config reporting
 
@@ -78,7 +92,8 @@ agent.configs(() => [
 ]);
 ```
 
-Configuration is **observed**, not pushed. The service remains the source of truth. See [Config Reporting](./config-reporting).
+Configuration is **observed**, not pushed. The service remains the source of
+truth. See [Config Reporting](./config-reporting).
 
 ## Action model
 
@@ -100,18 +115,24 @@ agent.action({
 });
 ```
 
-See [Action Model](./action-model) for the full lifecycle (`ACTION_PREPARE` → `ACTION_EXECUTE`, confirmation, schema-driven UI).
+See [Action Model](./action-model) for the full lifecycle (`ACTION_PREPARE` →
+`ACTION_EXECUTE`, confirmation, schema-driven UI).
 
 ## Command polling
 
-The agent maintains a long-poll against `GET /api/agents/commands` and dispatches incoming commands to the registered action handlers. You don't have to manage the polling loop yourself — `agent.start()` runs it for you.
+The agent maintains a long-poll against `GET /api/agents/commands` and
+dispatches incoming commands to the registered action handlers. You don't have
+to manage the polling loop yourself — `agent.start()` runs it for you.
 
 ## Security notes
 
-- Treat the registration token like a one-time secret. After first start, **do not** keep it in the environment.
+- Treat the registration token like a one-time secret. After first start, **do
+  not** keep it in the environment.
 - Persist the agent token file with restrictive file permissions (`chmod 600`).
-- The agent only makes **outbound** connections; you do not need to expose any inbound port to Opstage.
-- A leaked agent token can be revoked from the Opstage console — see [Token Model](../security/token-model).
+- The agent only makes **outbound** connections; you do not need to expose any
+  inbound port to Opstage.
+- A leaked agent token can be revoked from the Opstage console — see
+  [Token Model](../security/token-model).
 
 ## Relationship to other repos
 
@@ -121,4 +142,6 @@ The agent maintains a long-poll against `GET /api/agents/commands` and dispatche
 | [`xtrape-capsule-contracts-node`](https://github.com/xtrape-com/xtrape-capsule-contracts-node) | Shared Zod schemas / types used by SDK and backend |
 | [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce)                         | The Opstage CE backend the SDK talks to            |
 
-→ Continue with the [Capsule Management Contract](../concepts/management-contract) for the wire-level view.
+→ Continue with the
+[Capsule Management Contract](../concepts/management-contract) for the
+wire-level view.

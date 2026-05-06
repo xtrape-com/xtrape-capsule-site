@@ -1,6 +1,8 @@
 # Opstage CE Overview
 
-Opstage CE is the Community Edition of Xtrape Capsule. It is the **same control plane** described in [What is Opstage?](../concepts/opstage), packaged for self-hosting in a single container.
+Opstage CE is the Community Edition of Xtrape Capsule. It is the **same control
+plane** described in [What is Opstage?](../concepts/opstage), packaged for
+self-hosting in a single container.
 
 ## What CE includes
 
@@ -16,7 +18,8 @@ Opstage CE is the Community Edition of Xtrape Capsule. It is the **same control 
 
 ## What CE intentionally does **not** include
 
-These belong to EE / Cloud and are out of scope for v0.x CE:
+The following capabilities belong to EE / Cloud and are out of scope for v0.x
+CE.
 
 - HA / clustering
 - SSO, SCIM, multi-tenant org model
@@ -41,7 +44,8 @@ If you need any of those today, see [Editions](../editions/ce).
                               └────────────────────────┘
 ```
 
-The backend serves both the API (`/api`) and the static UI on a single HTTP port.
+The backend serves both the API (`/api`) and the static UI on a single HTTP
+port.
 
 ## Sizing
 

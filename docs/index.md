@@ -4,7 +4,10 @@ layout: home
 hero:
   name: Xtrape Capsule
   text: A lightweight control plane for AI-era Capsule Services.
-  tagline: Connect small services, automation workers, integration services, and agent runtimes to a unified Opstage console through an embedded Agent SDK.
+  tagline:
+    Connect small services, automation workers, integration adapters, background
+    jobs, private tools, and agent runtimes to a unified Opstage console through
+    an embedded Agent SDK.
   actions:
     - theme: brand
       text: Get Started
@@ -20,22 +23,24 @@ hero:
       link: https://github.com/xtrape-com/xtrape-capsule-ce
 
 features:
-  - title: Capsule Services
-    details: Lightweight, self-registering, observable, configurable, and auditable service units — built for the AI era.
+  - title: Agent-based governance
+    details: Capsule Services connect to Opstage through an embedded Agent SDK.
     link: /concepts/capsule-service
     linkText: Learn more
-  - title: Opstage Control Plane
-    details: An agent-based runtime governance console for inventory, health, configs, actions, commands, and audit.
+  - title: Self-hosted CE
+    details: Run the CE stack locally with SQLite and Docker Compose.
     link: /concepts/opstage
     linkText: Learn more
-  - title: Embedded Agent SDK
-    details: Drop a Node.js Agent into your service to register, heartbeat, report, and execute commands.
+  - title: Runtime visibility
+    details:
+      Track agents, services, health, config visibility, actions, and audit
+      events.
     link: /agents/node-embedded-agent
     linkText: Learn more
 ---
 
-::: warning Public Review · pre-v0.1 Public Preview
-Xtrape Capsule is currently in **Public Review** before the `v0.1.0 Public Preview` release.
+::: warning Public Review · pre-v0.1 Public Preview Xtrape Capsule is currently
+in **Public Review** before the `v0.1.0 Public Preview` release.
 
 APIs, contracts, deployment instructions, and SDK interfaces may still change.
 
@@ -52,14 +57,17 @@ APIs, contracts, deployment instructions, and SDK interfaces may still change.
 - public-internet exposure without additional protection;
 - regulated environments requiring full compliance controls.
 
-See the [Roadmap](/roadmap) for what's planned next.
-:::
+See the [Roadmap](/roadmap) for what's planned next. :::
 
 ## What is Xtrape Capsule?
 
-**Xtrape Capsule** is an open governance system for the long tail of small services that power modern AI products — integration adapters, automation workers, background jobs, private tools, and AI Agent runtimes.
+**Xtrape Capsule** is an open governance system for the long tail of small
+services that power modern AI products — integration adapters, automation
+workers, background jobs, private tools, and AI Agent runtimes.
 
-Instead of stitching together a service mesh, a config center, a monitoring stack, and a backstage, you get **one lightweight control plane** that speaks to your services through an embedded Agent.
+Instead of stitching together a service mesh, a config center, a monitoring
+stack, and a backstage, you get **one lightweight control plane** that speaks to
+your services through an embedded Agent.
 
 ```text
 Capsule Service  ──[Agent SDK]──▶  Opstage Backend  ◀──  Opstage UI
@@ -77,15 +85,20 @@ Most "services" in an AI product are not classic microservices. They are:
 - private tool runtimes
 - experimental connectors
 
-These deserve **runtime governance**, not heavy platform engineering. Capsule Services are designed to be **registered, observed, configured, operated, and audited** — without giving up their lightweight nature.
+These deserve **runtime governance**, not heavy platform engineering. Capsule
+Services are designed to be **registered, observed, configured, operated, and
+audited** — without giving up their lightweight nature.
 
 ## What is Opstage?
 
-> Opstage is an agent-based runtime governance control plane for Capsule Services.
+> Opstage is an agent-based runtime governance control plane for Capsule
+> Services.
 >
 > Opstage 是面向 Capsule Service 的 Agent-based 运行态治理控制面。
 
-Opstage gives you a clear, single-pane view of every Capsule Service across your fleet — what's online, what's healthy, what config it's running with, what actions it exposes, and what commands have been executed against it.
+Opstage gives you a clear, single-pane view of every Capsule Service across your
+fleet — what's online, what's healthy, what config it's running with, what
+actions it exposes, and what commands have been executed against it.
 
 ## How it works
 
@@ -112,13 +125,19 @@ Opstage gives you a clear, single-pane view of every Capsule Service across your
 ```
 
 1. The administrator creates a **registration token** in Opstage.
-2. The Capsule Service starts with an embedded **Agent SDK** and registers using that token.
-3. The Agent receives a long-lived **agent token**, sends heartbeats, and reports its services.
-4. Opstage tracks **inventory, health, configs, and actions** through the contract.
-5. Operators trigger **actions** from the UI; Opstage queues commands; the Agent polls and executes them.
+2. The Capsule Service starts with an embedded **Agent SDK** and registers using
+   that token.
+3. The Agent receives a long-lived **agent token**, sends heartbeats, and
+   reports its services.
+4. Opstage tracks **inventory, health, configs, and actions** through the
+   contract.
+5. Operators trigger **actions** from the UI; Opstage queues commands; the Agent
+   polls and executes them.
 6. Every meaningful event lands in the **audit log**.
 
-The Backend never opens a socket to your services. All connections are initiated outbound by the Agent, which is what makes Opstage runnable behind NAT, on a laptop, or inside customer environments.
+The Backend never opens a socket to your services. All connections are initiated
+outbound by the Agent, which is what makes Opstage runnable behind NAT, on a
+laptop, or inside customer environments.
 
 ## Quick Start
 
@@ -130,9 +149,8 @@ docker compose -f deploy/compose/docker-compose.yml up --build -d
 
 Open `http://localhost:8080` and sign in with the bootstrap admin account.
 
-::: info
-Public Docker images are planned for the v0.1.0 Public Preview release; until then, build locally with the command above.
-:::
+::: info Public Docker images are planned for the v0.1.0 Public Preview release;
+until then, build locally with the command above. :::
 
 → [Full Quick Start guide](/getting-started/quick-start)
 
@@ -177,11 +195,17 @@ await agent.start();
 
 ## Roadmap
 
-Xtrape Capsule is currently in **Public Review** before the `v0.1.0 Public Preview` release. See the full [roadmap](/roadmap) for what's planned next.
+Xtrape Capsule is currently in **Public Review** before the
+`v0.1.0 Public Preview` release. See the full [roadmap](/roadmap) for what's
+planned next.
 
 ## Repositories
 
-- [xtrape-capsule-ce](https://github.com/xtrape-com/xtrape-capsule-ce) — Opstage CE backend, UI, deploy
-- [xtrape-capsule-agent-node](https://github.com/xtrape-com/xtrape-capsule-agent-node) — Node.js embedded Agent SDK
-- [xtrape-capsule-contracts-node](https://github.com/xtrape-com/xtrape-capsule-contracts-node) — Shared contracts & Zod schemas
-- [xtrape-capsule-site](https://github.com/xtrape-com/xtrape-capsule-site) — This site
+- [xtrape-capsule-ce](https://github.com/xtrape-com/xtrape-capsule-ce) — Opstage
+  CE backend, UI, deploy
+- [xtrape-capsule-agent-node](https://github.com/xtrape-com/xtrape-capsule-agent-node)
+  — Node.js embedded Agent SDK
+- [xtrape-capsule-contracts-node](https://github.com/xtrape-com/xtrape-capsule-contracts-node)
+  — Shared contracts & Zod schemas
+- [xtrape-capsule-site](https://github.com/xtrape-com/xtrape-capsule-site) —
+  This site

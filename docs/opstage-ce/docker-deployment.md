@@ -1,10 +1,13 @@
 # Docker Deployment
 
-Opstage CE is designed to run as a **single container** with a SQLite volume. This page covers the production-style deployment paths.
+Opstage CE is designed to run as a **single container** with a SQLite volume.
+This page covers the production-style deployment paths.
 
-::: warning Public images are not yet published
-The Docker image at `ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` is planned for the v0.1.0 Public Preview release. **Until then, build locally with the Compose path below.** Snippets that reference `ghcr.io/...` further down this page work only after the image is published.
-:::
+::: warning Public images are not yet published The Docker image at
+`ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` is planned for the v0.1.0 Public
+Preview release. **Until then, build locally with the Compose path below.**
+Snippets that reference `ghcr.io/...` further down this page work only after the
+image is published. :::
 
 ## Build and run from source (current path)
 
@@ -16,11 +19,13 @@ cp .env.example .env
 docker compose -f deploy/compose/docker-compose.yml up --build -d
 ```
 
-The compose file builds the image locally, mounts a `data` volume, and exposes port `8080`.
+The compose file builds the image locally, mounts a `data` volume, and exposes
+port `8080`.
 
 ## Single image (planned after publication)
 
-After public images are published, use a pinned release tag instead of `latest`. The expected shape is:
+After public images are published, use a pinned release tag instead of `latest`.
+The expected shape is:
 
 ```bash
 docker run -d \
@@ -79,9 +84,8 @@ Mount a named volume or a host directory:
 -v /opt/opstage:/app/data         # bind mount
 ```
 
-::: warning
-CE is **single-node**. Running two backend containers against the same SQLite file is unsupported.
-:::
+::: warning CE is **single-node**. Running two backend containers against the
+same SQLite file is unsupported. :::
 
 ## Environment variables
 
@@ -102,7 +106,8 @@ A complete reference is in [Configuration](./configuration).
 
 ## Ports
 
-A single HTTP port (default `8080`) serves both the API (`/api`) and the static console.
+A single HTTP port (default `8080`) serves both the API (`/api`) and the static
+console.
 
 If you put Opstage behind a reverse proxy:
 
@@ -121,7 +126,9 @@ docker logs -f opstage-ce
 
 ## Backups
 
-For SQLite backup options (consistent online snapshots, owner-only download from the console, scheduled file copies), see [Backup and Upgrade](./backup-and-upgrade).
+For SQLite backup options (consistent online snapshots, owner-only download from
+the console, scheduled file copies), see
+[Backup and Upgrade](./backup-and-upgrade).
 
 ## Upgrades
 
@@ -130,6 +137,5 @@ For SQLite backup options (consistent online snapshots, owner-only download from
 3. Recreate the container: `docker compose up -d`.
 4. The backend runs Prisma migrations on start.
 
-::: tip
-Pin a specific tag in your compose file. CE follows semver - read the changelog before adopting a new minor.
-:::
+::: tip Pin a specific tag in your compose file. CE follows semver - read the
+changelog before adopting a new minor. :::

@@ -63,6 +63,8 @@ Instead of stitching together a service mesh, a config center, a monitoring stac
 Capsule Service  ──[Agent SDK]──▶  Opstage Backend  ◀──  Opstage UI
 ```
 
+![Xtrape Capsule architecture](/diagrams/architecture.svg)
+
 ## Why Capsule Services?
 
 Most "services" in an AI product are not classic microservices. They are:

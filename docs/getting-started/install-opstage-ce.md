@@ -1,23 +1,10 @@
 # Install Opstage CE
 
-Three supported install paths, in order of recommendation.
+Two supported install paths, in order of recommendation.
 
-## 1. Docker (recommended)
+## 1. Docker Compose from source (recommended)
 
-See [Docker Deployment](../opstage-ce/docker-deployment) for the full reference. The shortest path:
-
-```bash
-docker run -d -p 8080:8080 \
-  -v opstage-data:/app/data \
-  -e OPSTAGE_ADMIN_USERNAME="admin@example.local" \
-  -e OPSTAGE_ADMIN_PASSWORD="ChangeMeBeforeRunning123!" \
-  -e OPSTAGE_SESSION_SECRET="rotate-me" \
-  ghcr.io/xtrape-com/xtrape-capsule-ce:latest
-```
-
-## 2. Local build from source
-
-Useful while public images are still pending, or when you want to develop against Opstage CE.
+See [Docker Deployment](../opstage-ce/docker-deployment) for the full reference. The current Public Preview preparation path builds the image locally:
 
 ```bash
 git clone https://github.com/xtrape-com/xtrape-capsule-ce
@@ -29,7 +16,11 @@ docker compose -f deploy/compose/docker-compose.yml up --build -d
 
 Open `http://localhost:8080`.
 
-## 3. Local development (no Docker)
+::: info
+Public Docker images are planned for the v0.1.0 Public Preview release. This page will switch to a pinned GHCR tag after the image is published.
+:::
+
+## 2. Local development (no Docker)
 
 ```bash
 pnpm install

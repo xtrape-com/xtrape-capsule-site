@@ -62,7 +62,7 @@ docs/
 └── glossary.md
 
 blog/                        # release posts
-public/                      # static assets (screenshots, diagrams)
+docs/public/                 # static assets copied by VitePress
 .github/workflows/deploy.yml # CI deploy to GitHub Pages
 ```
 

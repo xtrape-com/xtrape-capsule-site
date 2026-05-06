@@ -15,6 +15,8 @@ Instead:
 
 This means the **Agent** is the active party. The Backend never needs inbound access to the service.
 
+![Agent registration flow](/diagrams/agent-registration-flow.svg)
+
 ## End-to-end flow
 
 ```text

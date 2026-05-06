@@ -18,7 +18,9 @@ docker compose -f deploy/compose/docker-compose.yml up --build -d
 
 The compose file builds the image locally, mounts a `data` volume, and exposes port `8080`.
 
-## Single image (once published)
+## Single image (planned after publication)
+
+After public images are published, use a pinned release tag instead of `latest`. The expected shape is:
 
 ```bash
 docker run -d \
@@ -129,5 +131,5 @@ For SQLite backup options (consistent online snapshots, owner-only download from
 4. The backend runs Prisma migrations on start.
 
 ::: tip
-Before pulling `latest` into production, pin a specific tag in your compose file. CE follows semver — read the changelog before adopting a new minor.
+Pin a specific tag in your compose file. CE follows semver - read the changelog before adopting a new minor.
 :::

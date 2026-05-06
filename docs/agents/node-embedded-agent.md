@@ -15,12 +15,8 @@ For non-Node services, run the Node agent as a sidecar process or use a future l
 ## Install
 
 ::: warning Not yet on npm
-`@xtrape/capsule-agent-node` is not yet published to npm. Until the v0.1.0 Public Preview, link it from the [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node) repo or use it from the [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace. After publishing:
+`@xtrape/capsule-agent-node` is not yet published to npm. Until the v0.1.0 Public Preview, link it from the [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node) repo or use it from the [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace. After publishing, this page will include the pinned npm install command.
 :::
-
-```bash
-pnpm add @xtrape/capsule-agent-node
-```
 
 ## Minimal example
 

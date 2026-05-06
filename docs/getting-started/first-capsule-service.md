@@ -38,11 +38,6 @@ pnpm add -D typescript tsx @types/node
 
 ::: warning SDK install path
 `@xtrape/capsule-agent-node` is **not yet published to npm**. Until the v0.1.0 Public Preview, link it from a local checkout of [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node), or run your service from inside the [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace where the package is already wired up. After the package is published, the install command will be:
-
-```bash
-pnpm add @xtrape/capsule-agent-node
-```
-
 :::
 
 `tsconfig.json`:
@@ -135,7 +130,7 @@ pnpm exec tsx src/main.ts
 On first start the agent:
 
 1. exchanges the registration token for an agent token,
-2. saves the agent token under `./data/agent-token.json`,
+2. saves the agent token under `./data/agent-token.txt`,
 3. starts heartbeating and reporting `my-capsule`.
 
 ::: tip
@@ -156,7 +151,7 @@ In Opstage CE you should now see:
 2. Click **Run** on `echo`.
 3. Fill the form (`message: "hi"`) and confirm.
 4. Opstage creates a `command`; your agent picks it up via long-poll and runs the handler.
-5. The command result appears in **Commands** with `status = SUCCEEDED` and `result = { "echoed": "hi" }`.
+5. The command result appears in **Commands** with `status = SUCCEEDED` and `result = { "echo": "hi" }`.
 
 ## 8. Inspect the audit trail
 

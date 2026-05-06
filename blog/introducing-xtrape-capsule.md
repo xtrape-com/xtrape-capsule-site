@@ -50,8 +50,11 @@ CE v0.2 hardens the operational story (public ghcr.io image, observability), v0.
 ## Try it
 
 ```bash
-docker run -p 8080:8080 -v opstage-data:/app/data \
-  ghcr.io/xtrape-com/xtrape-capsule-ce:latest
+git clone https://github.com/xtrape-com/xtrape-capsule-ce.git
+cd xtrape-capsule-ce
+cp .env.example .env
+# edit OPSTAGE_ADMIN_PASSWORD and OPSTAGE_SESSION_SECRET in .env
+docker compose -f deploy/compose/docker-compose.yml up --build -d
 ```
 
 Then follow the [first Capsule Service guide](/getting-started/first-capsule-service) to wire your first service in 10 minutes.

@@ -20,10 +20,10 @@ You do **not** need Node.js, a database server, or a reverse proxy to run Opstag
 :::
 
 ::: info Public Docker image is planned
-A public image at `ghcr.io/xtrape-com/xtrape-capsule-ce:latest` is planned for the v0.1.0 Public Preview release. Until then, the recommended path is the local Docker Compose build below.
+Public Docker images are planned for the v0.1.0 Public Preview release. Until then, the recommended path is the local Docker Compose build below.
 :::
 
-## Recommended — Docker Compose from source
+## Recommended - Docker Compose from source
 
 ```bash
 git clone https://github.com/xtrape-com/xtrape-capsule-ce.git
@@ -35,18 +35,7 @@ docker compose -f deploy/compose/docker-compose.yml up --build -d
 
 The compose file builds Opstage CE locally, mounts a `data` volume, and exposes port `8080`.
 
-## Once images are published — single container
-
-```bash
-docker run -d \
-  --name opstage-ce \
-  -p 8080:8080 \
-  -v opstage-data:/app/data \
-  -e OPSTAGE_ADMIN_USERNAME="admin@example.local" \
-  -e OPSTAGE_ADMIN_PASSWORD="ChangeMeBeforeRunning123!" \
-  -e OPSTAGE_SESSION_SECRET="please-rotate-this-secret" \
-  ghcr.io/xtrape-com/xtrape-capsule-ce:latest
-```
+![Opstage CE source-build architecture](/diagrams/architecture.svg)
 
 ## Default access
 

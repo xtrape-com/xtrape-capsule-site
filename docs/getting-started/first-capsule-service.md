@@ -67,7 +67,9 @@ import { CapsuleAgent } from "@xtrape/capsule-agent-node";
 const agent = new CapsuleAgent({
   backendUrl: process.env.OPSTAGE_BACKEND_URL ?? "http://localhost:8080",
   registrationToken: process.env.OPSTAGE_REGISTRATION_TOKEN,
-  tokenStore: { file: process.env.OPSTAGE_AGENT_TOKEN_FILE ?? "./data/agent-token.txt" },
+  tokenStore: {
+    file: process.env.OPSTAGE_AGENT_TOKEN_FILE ?? "./data/agent-token.txt",
+  },
   service: {
     code: "my-capsule",
     name: "My Capsule Service",

@@ -34,8 +34,10 @@ features:
     linkText: Learn more
 ---
 
-::: warning Public Preview · v0.1
-Xtrape Capsule CE is currently in **v0.1 Public Preview**.
+::: warning Public Review · pre-v0.1 Public Preview
+Xtrape Capsule is currently in **Public Review** before the `v0.1.0 Public Preview` release.
+
+APIs, contracts, deployment instructions, and SDK interfaces may still change.
 
 **Recommended for**
 
@@ -55,7 +57,7 @@ See the [Roadmap](/roadmap) for what's planned next.
 
 ## What is Xtrape Capsule?
 
-**Xtrape Capsule** is an open governance system for the long tail of small services that power modern AI products — integration adapters, Playwright workers, account pools, OTP readers, proxy checkers, and AI Agent runtimes.
+**Xtrape Capsule** is an open governance system for the long tail of small services that power modern AI products — integration adapters, automation workers, background jobs, private tools, and AI Agent runtimes.
 
 Instead of stitching together a service mesh, a config center, a monitoring stack, and a backstage, you get **one lightweight control plane** that speaks to your services through an embedded Agent.
 
@@ -71,8 +73,8 @@ Most "services" in an AI product are not classic microservices. They are:
 
 - short-lived workers
 - automation scripts
-- API bridges
-- per-account or per-session runtimes
+- integration adapters
+- private tool runtimes
 - experimental connectors
 
 These deserve **runtime governance**, not heavy platform engineering. Capsule Services are designed to be **registered, observed, configured, operated, and audited** — without giving up their lightweight nature.
@@ -158,11 +160,11 @@ await agent.start();
 
 ## Editions
 
-| Edition | Status | Audience |
-| --- | --- | --- |
-| **CE — Community Edition** | Public Preview | Individuals, small teams, self-hosted private services |
-| **EE — Enterprise Edition** | Planned | Companies needing RBAC, SSO, HA, secret vault, central logs |
-| **Cloud** | Future | Teams who don't want to self-host |
+| Edition                     | Status        | Audience                                                    |
+| --------------------------- | ------------- | ----------------------------------------------------------- |
+| **CE — Community Edition**  | Public Review | Individuals, small teams, self-hosted private services      |
+| **EE — Enterprise Edition** | Planned       | Companies needing RBAC, SSO, HA, secret vault, central logs |
+| **Cloud**                   | Future        | Teams who don't want to self-host                           |
 
 → [Compare editions](/editions/ce)
 
@@ -175,7 +177,7 @@ await agent.start();
 
 ## Roadmap
 
-`v0.1` Public Preview is **Current**. See the full [roadmap](/roadmap) for what's planned next.
+Xtrape Capsule is currently in **Public Review** before the `v0.1.0 Public Preview` release. See the full [roadmap](/roadmap) for what's planned next.
 
 ## Repositories
 

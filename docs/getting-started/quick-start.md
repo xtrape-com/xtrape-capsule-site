@@ -39,10 +39,10 @@ The compose file builds Opstage CE locally, mounts a `data` volume, and exposes 
 
 ## Default access
 
-| Item | Value |
-| --- | --- |
-| URL | `http://localhost:8080` |
-| Username | `OPSTAGE_ADMIN_USERNAME` (default: `admin@example.local`) |
+| Item     | Value                                                           |
+| -------- | --------------------------------------------------------------- |
+| URL      | `http://localhost:8080`                                         |
+| Username | `OPSTAGE_ADMIN_USERNAME` (default: `admin@example.local`)       |
 | Password | `OPSTAGE_ADMIN_PASSWORD` (default: `ChangeMeBeforeRunning123!`) |
 
 ::: warning

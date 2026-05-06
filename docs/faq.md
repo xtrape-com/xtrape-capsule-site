@@ -18,7 +18,7 @@ Nacos and Apollo are **configuration centers**: they push config values out as t
 
 ## How is Opstage different from Prometheus / Grafana?
 
-Prometheus is a **time-series metrics system**. Opstage is **not**. It tracks coarse health (`HEALTHY` / `UNHEALTHY` / `STALE` / `OFFLINE`) and answers "is this Capsule Service okay right now?" — not "what's the p99 latency?". They are complementary: run both.
+Prometheus is a **time-series metrics system**. Opstage is **not**. Agents report protocol-level `HealthStatus` values (`UP` / `DEGRADED` / `DOWN` / `UNKNOWN`), and Opstage derives operator-facing `effectiveStatus` values (`HEALTHY` / `UNHEALTHY` / `STALE` / `OFFLINE`). It answers "is this Capsule Service okay right now?" — not "what's the p99 latency?". They are complementary: run both.
 
 ## How is Opstage different from Backstage?
 
@@ -29,8 +29,8 @@ Backstage is a **developer portal** — software catalog, scaffolding, plugin pl
 Yes — Opstage is intentionally narrow. It focuses on Capsule Services and leaves the rest of the platform to the tools you already use:
 
 - **Metrics:** keep using Prometheus / Grafana / DataDog. Opstage tracks coarse health, not time-series.
-- **Logs:** keep using your existing log pipeline. Opstage's audit log is an *operator-action* log, not a system log.
-- **Configs / secrets:** keep using your existing config or secret system. Opstage observes what services *report*, it does not push values.
+- **Logs:** keep using your existing log pipeline. Opstage's audit log is an _operator-action_ log, not a system log.
+- **Configs / secrets:** keep using your existing config or secret system. Opstage observes what services _report_, it does not push values.
 - **Developer portal:** keep using Backstage / your portal. Opstage links to it, doesn't replace it.
 
 Future integrations (OpenTelemetry context propagation, SIEM bridges, vault-backed secret injection in EE/Cloud) build on this stance.
@@ -53,11 +53,13 @@ After CE v1.0 stabilizes. We don't promise dates. See [Roadmap](./roadmap).
 
 ## Is the current version production-ready?
 
-CE v0.1 is **Public Preview**. It's suitable for individuals, small teams, and private deployments where you control the failure domain. For business-critical production with HA / SSO / SIEM requirements, wait for CE v1.0 or EE.
+CE is currently in **Public Review** before the `v0.1.0 Public Preview` release. It is suitable for individuals, small teams, and private deployments where you control the failure domain. APIs, contracts, deployment instructions, and SDK interfaces may still change. For business-critical production with HA / SSO / SIEM requirements, wait for CE v1.0 or EE.
 
 ## What language can my Capsule Service be in?
 
-Today: any language that can run the [Node Embedded Agent](./agents/node-embedded-agent) — either as an embedded Node module or as a sidecar process. A Python agent and a standalone agent are on the [Roadmap](./roadmap).
+Today, Node.js services can use the [embedded Agent SDK](./agents/node-embedded-agent) directly.
+
+Other runtimes can integrate through custom wrappers today, while dedicated sidecar and standalone agents are planned on the [Roadmap](./roadmap).
 
 ## How do I report an issue?
 

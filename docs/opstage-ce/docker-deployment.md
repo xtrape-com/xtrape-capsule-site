@@ -67,10 +67,10 @@ docker compose up -d
 
 ## Data directory
 
-| Path inside container | Contents |
-| --- | --- |
-| `/app/data/opstage.db` | SQLite database |
-| `/app/data/backups/` | (Optional) SQLite backups, when configured |
+| Path inside container  | Contents                                   |
+| ---------------------- | ------------------------------------------ |
+| `/app/data/opstage.db` | SQLite database                            |
+| `/app/data/backups/`   | (Optional) SQLite backups, when configured |
 
 Mount a named volume or a host directory:
 
@@ -87,16 +87,16 @@ CE is **single-node**. Running two backend containers against the same SQLite fi
 
 The most relevant variables for a Docker deployment:
 
-| Variable | Required | Default | Description |
-| --- | :---: | --- | --- |
-| `OPSTAGE_ADMIN_USERNAME` | bootstrap | — | Username for the bootstrap admin |
-| `OPSTAGE_ADMIN_PASSWORD` | bootstrap | — | Password for the bootstrap admin |
-| `OPSTAGE_SESSION_SECRET` | yes | — | Signs admin session cookies |
-| `OPSTAGE_PORT` | no | `8080` | HTTP listen port |
-| `OPSTAGE_DATA_DIR` | no | `/app/data` | Where SQLite + backups live |
-| `OPSTAGE_AGENT_OFFLINE_THRESHOLD_SECONDS` | no | `90` | Heartbeat-miss threshold |
-| `OPSTAGE_SESSION_TTL_SECONDS` | no | `28800` | Admin session TTL (8h) |
-| `OPSTAGE_AUDIT_RETENTION_DAYS` | no | `90` | Audit pruning window |
+| Variable                                  | Required  | Default     | Description                      |
+| ----------------------------------------- | :-------: | ----------- | -------------------------------- |
+| `OPSTAGE_ADMIN_USERNAME`                  | bootstrap | —           | Username for the bootstrap admin |
+| `OPSTAGE_ADMIN_PASSWORD`                  | bootstrap | —           | Password for the bootstrap admin |
+| `OPSTAGE_SESSION_SECRET`                  |    yes    | —           | Signs admin session cookies      |
+| `OPSTAGE_PORT`                            |    no     | `8080`      | HTTP listen port                 |
+| `OPSTAGE_DATA_DIR`                        |    no     | `/app/data` | Where SQLite + backups live      |
+| `OPSTAGE_AGENT_OFFLINE_THRESHOLD_SECONDS` |    no     | `90`        | Heartbeat-miss threshold         |
+| `OPSTAGE_SESSION_TTL_SECONDS`             |    no     | `28800`     | Admin session TTL (8h)           |
+| `OPSTAGE_AUDIT_RETENTION_DAYS`            |    no     | `90`        | Audit pruning window             |
 
 A complete reference is in [Configuration](./configuration).
 

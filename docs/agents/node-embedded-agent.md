@@ -10,12 +10,12 @@ The **Node Embedded Agent** is a small library you import directly into your Nod
 
 Use the embedded agent when your service is itself a Node.js process — an integration adapter, a Playwright worker, an AI Agent runtime, or any worker you can `import` into.
 
-For non-Node services, run the Node agent as a sidecar process or use a future language-specific agent.
+Other runtimes can integrate through custom wrappers today, while dedicated sidecar and standalone agents are planned on the roadmap.
 
 ## Install
 
 ::: warning Not yet on npm
-`@xtrape/capsule-agent-node` is not yet published to npm. Until the v0.1.0 Public Preview, link it from the [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node) repo or use it from the [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace. After publishing, this page will include the pinned npm install command.
+`@xtrape/capsule-agent-node` is not yet published to npm. During Public Review, link it from the [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node) repo or use it from the [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace. After publishing, this page will include the pinned npm install command.
 :::
 
 ## Minimal example
@@ -52,6 +52,10 @@ agent.health(async () => {
 ```
 
 Health is sampled on the heartbeat cadence and surfaced in the Opstage console. See [Health Reporting](./health-reporting).
+
+Agent health providers return protocol-level `HealthStatus` values: `UP`, `DEGRADED`, `DOWN`, `UNKNOWN`.
+
+Opstage may derive an operator-facing `effectiveStatus`: `HEALTHY`, `UNHEALTHY`, `STALE`, `OFFLINE`.
 
 ## Config reporting
 
@@ -111,10 +115,10 @@ The agent maintains a long-poll against `GET /api/agents/commands` and dispatche
 
 ## Relationship to other repos
 
-| Repo | Purpose |
-| --- | --- |
-| [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node) | This SDK |
+| Repo                                                                                           | Purpose                                            |
+| ---------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node)         | This SDK                                           |
 | [`xtrape-capsule-contracts-node`](https://github.com/xtrape-com/xtrape-capsule-contracts-node) | Shared Zod schemas / types used by SDK and backend |
-| [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) | The Opstage CE backend the SDK talks to |
+| [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce)                         | The Opstage CE backend the SDK talks to            |
 
 → Continue with the [Capsule Management Contract](../concepts/management-contract) for the wire-level view.

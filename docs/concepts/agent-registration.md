@@ -53,7 +53,7 @@ This means the **Agent** is the active party. The Backend never needs inbound ac
 ## Step by step
 
 1. **Operator creates a registration token.**
-   In Opstage UI → *Registration Tokens* → *Create*. The one-time token (`opstage_reg_...`) is shown **once**. Only its hash is persisted.
+   In Opstage UI → _Registration Tokens_ → _Create_. The one-time token (`opstage_reg_...`) is shown **once**. Only its hash is persisted.
 
 2. **Agent boots with the registration token.**
    Typically passed as `OPSTAGE_REGISTRATION_TOKEN`. The agent posts it to `POST /api/agents/register` along with hostname, agent SDK version, and Capsule Service manifests.
@@ -75,6 +75,10 @@ This means the **Agent** is the active party. The Backend never needs inbound ac
 
 8. **Backend computes effectiveStatus per service.**
    `HEALTHY` / `UNHEALTHY` / `STALE` / `OFFLINE` based on agent state plus last-report freshness.
+
+Agent health providers return protocol-level `HealthStatus` values: `UP`, `DEGRADED`, `DOWN`, `UNKNOWN`.
+
+Opstage may derive an operator-facing `effectiveStatus`: `HEALTHY`, `UNHEALTHY`, `STALE`, `OFFLINE`.
 
 ## What happens when things go wrong
 

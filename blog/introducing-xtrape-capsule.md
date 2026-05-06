@@ -1,6 +1,6 @@
 # Introducing Xtrape Capsule
 
-> *Published with the v0.1 Public Preview.*
+> _Drafted during Public Review before the v0.1.0 Public Preview._
 
 Modern AI products quietly accumulate dozens of small services: integration adapters, Playwright workers, account pools, OTP readers, AI Agent runtimes. They are too small for a service mesh and too important to leave unmanaged. **Xtrape Capsule** is built for that gap.
 

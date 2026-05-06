@@ -36,10 +36,22 @@ export default defineConfig({
       {
         text: "GitHub",
         items: [
-          { text: "Opstage CE", link: "https://github.com/xtrape-com/xtrape-capsule-ce" },
-          { text: "Agent SDK (Node)", link: "https://github.com/xtrape-com/xtrape-capsule-agent-node" },
-          { text: "Contracts (Node)", link: "https://github.com/xtrape-com/xtrape-capsule-contracts-node" },
-          { text: "Site (this repo)", link: "https://github.com/xtrape-com/xtrape-capsule-site" },
+          {
+            text: "Opstage CE",
+            link: "https://github.com/xtrape-com/xtrape-capsule-ce",
+          },
+          {
+            text: "Agent SDK (Node)",
+            link: "https://github.com/xtrape-com/xtrape-capsule-agent-node",
+          },
+          {
+            text: "Contracts (Node)",
+            link: "https://github.com/xtrape-com/xtrape-capsule-contracts-node",
+          },
+          {
+            text: "Site (this repo)",
+            link: "https://github.com/xtrape-com/xtrape-capsule-site",
+          },
         ],
       },
     ],
@@ -50,8 +62,14 @@ export default defineConfig({
           text: "Guide",
           items: [
             { text: "Quick Start", link: "/getting-started/quick-start" },
-            { text: "Install Opstage CE", link: "/getting-started/install-opstage-ce" },
-            { text: "First Capsule Service", link: "/getting-started/first-capsule-service" },
+            {
+              text: "Install Opstage CE",
+              link: "/getting-started/install-opstage-ce",
+            },
+            {
+              text: "First Capsule Service",
+              link: "/getting-started/first-capsule-service",
+            },
             { text: "Demo", link: "/getting-started/demo" },
           ],
         },
@@ -63,8 +81,14 @@ export default defineConfig({
             { text: "Capsule Service", link: "/concepts/capsule-service" },
             { text: "Opstage", link: "/concepts/opstage" },
             { text: "Agent", link: "/concepts/agent" },
-            { text: "Agent Registration", link: "/concepts/agent-registration" },
-            { text: "Management Contract", link: "/concepts/management-contract" },
+            {
+              text: "Agent Registration",
+              link: "/concepts/agent-registration",
+            },
+            {
+              text: "Management Contract",
+              link: "/concepts/management-contract",
+            },
           ],
         },
       ],
@@ -73,10 +97,16 @@ export default defineConfig({
           text: "Opstage CE",
           items: [
             { text: "Overview", link: "/opstage-ce/overview" },
-            { text: "Docker Deployment", link: "/opstage-ce/docker-deployment" },
+            {
+              text: "Docker Deployment",
+              link: "/opstage-ce/docker-deployment",
+            },
             { text: "Configuration", link: "/opstage-ce/configuration" },
             { text: "Admin UI", link: "/opstage-ce/admin-ui" },
-            { text: "Backup and Upgrade", link: "/opstage-ce/backup-and-upgrade" },
+            {
+              text: "Backup and Upgrade",
+              link: "/opstage-ce/backup-and-upgrade",
+            },
           ],
         },
       ],
@@ -84,7 +114,10 @@ export default defineConfig({
         {
           text: "Agents",
           items: [
-            { text: "Node Embedded Agent", link: "/agents/node-embedded-agent" },
+            {
+              text: "Node Embedded Agent",
+              link: "/agents/node-embedded-agent",
+            },
             { text: "Action Model", link: "/agents/action-model" },
             { text: "Health Reporting", link: "/agents/health-reporting" },
             { text: "Config Reporting", link: "/agents/config-reporting" },
@@ -107,8 +140,14 @@ export default defineConfig({
         {
           text: "Use Cases",
           items: [
-            { text: "Integration Services", link: "/use-cases/integration-services" },
-            { text: "Playwright Workers", link: "/use-cases/playwright-workers" },
+            {
+              text: "Integration Services",
+              link: "/use-cases/integration-services",
+            },
+            {
+              text: "Playwright Workers",
+              link: "/use-cases/playwright-workers",
+            },
             { text: "Account Pool", link: "/use-cases/account-pool" },
             { text: "AI Agent Runtime", link: "/use-cases/ai-agent-runtime" },
           ],
@@ -137,7 +176,10 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/xtrape-com/xtrape-capsule-ce" },
+      {
+        icon: "github",
+        link: "https://github.com/xtrape-com/xtrape-capsule-ce",
+      },
     ],
 
     search: { provider: "local" },
@@ -150,7 +192,8 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: "https://github.com/xtrape-com/xtrape-capsule-site/edit/main/docs/:path",
+      pattern:
+        "https://github.com/xtrape-com/xtrape-capsule-site/edit/main/docs/:path",
       text: "Edit this page on GitHub",
     },
   },

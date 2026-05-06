@@ -1,10 +1,12 @@
 # Build Your First Capsule Service
 
-This walks you through wiring a minimal Node.js Capsule Service into Opstage in about 10 minutes.
+This walks you through wiring a minimal Node.js Capsule Service into Opstage in
+about 10 minutes.
 
-::: info
-This guide targets the current `main` branch of [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node). When the SDK is published to npm as `@xtrape/capsule-agent-node` v0.1.x, this page will be pinned to a verified release.
-:::
+::: info This guide targets the current `main` branch of
+[`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node).
+When the SDK is published to npm as `@xtrape/capsule-agent-node` v0.1.x, this
+page will be pinned to a verified release. :::
 
 ## What you'll build
 
@@ -18,7 +20,8 @@ A tiny service that:
 
 ## 1. Have Opstage CE running
 
-Follow the [Quick Start](./quick-start) first. You should be able to sign in to `http://localhost:8080`.
+Follow the [Quick Start](./quick-start) first. You should be able to sign in to
+`http://localhost:8080`.
 
 ## 2. Create a registration token
 
@@ -36,14 +39,13 @@ pnpm init
 pnpm add -D typescript tsx @types/node
 ```
 
-::: warning SDK install path
-`@xtrape/capsule-agent-node` is **not yet published to npm**. Until the v0.1.0 Public Preview, link it from a local checkout of [`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node), or run your service from inside the [`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace where the package is already wired up. After the package is published, the install command will be:
-
-```bash
-pnpm add @xtrape/capsule-agent-node
-```
-
-:::
+::: warning SDK install path `@xtrape/capsule-agent-node` is **not yet published
+to npm**. Until the v0.1.0 Public Preview, link it from a local checkout of
+[`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node),
+or run your service from inside the
+[`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace
+where the package is already wired up. After the package is published, the
+install command will be: :::
 
 `tsconfig.json`:
 
@@ -72,7 +74,9 @@ import { CapsuleAgent } from "@xtrape/capsule-agent-node";
 const agent = new CapsuleAgent({
   backendUrl: process.env.OPSTAGE_BACKEND_URL ?? "http://localhost:8080",
   registrationToken: process.env.OPSTAGE_REGISTRATION_TOKEN,
-  tokenStore: { file: process.env.OPSTAGE_AGENT_TOKEN_FILE ?? "./data/agent-token.txt" },
+  tokenStore: {
+    file: process.env.OPSTAGE_AGENT_TOKEN_FILE ?? "./data/agent-token.txt",
+  },
   service: {
     code: "my-capsule",
     name: "My Capsule Service",
@@ -135,12 +139,11 @@ pnpm exec tsx src/main.ts
 On first start the agent:
 
 1. exchanges the registration token for an agent token,
-2. saves the agent token under `./data/agent-token.json`,
+2. saves the agent token under `./data/agent-token.txt`,
 3. starts heartbeating and reporting `my-capsule`.
 
-::: tip
-Subsequent restarts use the cached agent token. The registration token can be revoked from the Opstage console once your service is online.
-:::
+::: tip Subsequent restarts use the cached agent token. The registration token
+can be revoked from the Opstage console once your service is online. :::
 
 ## 6. Verify in the console
 
@@ -148,15 +151,18 @@ In Opstage CE you should now see:
 
 - **Agents** — your new agent listed as `ONLINE`.
 - **Capsule Services** — `my-capsule` with health `HEALTHY`.
-- **Audit Events** — `agent.registered`, `service.reported`, `agent.heartbeat.received`.
+- **Audit Events** — `agent.registered`, `service.reported`,
+  `agent.heartbeat.received`.
 
 ## 7. Trigger an action
 
 1. Open `my-capsule` → **Actions** tab.
 2. Click **Run** on `echo`.
 3. Fill the form (`message: "hi"`) and confirm.
-4. Opstage creates a `command`; your agent picks it up via long-poll and runs the handler.
-5. The command result appears in **Commands** with `status = SUCCEEDED` and `result = { "echoed": "hi" }`.
+4. Opstage creates a `command`; your agent picks it up via long-poll and runs
+   the handler.
+5. The command result appears in **Commands** with `status = SUCCEEDED` and
+   `result = { "echo": "hi" }`.
 
 ## 8. Inspect the audit trail
 
@@ -166,4 +172,5 @@ Every meaningful event is recorded:
 - `command.dispatched` (agent picked it up)
 - `command.completed` (agent reported success)
 
-→ Continue with [Node Embedded Agent](../agents/node-embedded-agent) for the full SDK surface.
+→ Continue with [Node Embedded Agent](../agents/node-embedded-agent) for the
+full SDK surface.

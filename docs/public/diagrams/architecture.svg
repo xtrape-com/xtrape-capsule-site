@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620" role="img" aria-labelledby="title desc">
+  <title id="title">Xtrape Capsule architecture</title>
+  <desc id="desc">Opstage UI and backend govern Capsule Services through outbound embedded Agent SDK connections.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 10; }
+      .accent { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 10; }
+      .text { fill: #0f172a; font: 600 24px system-ui, sans-serif; }
+      .small { fill: #334155; font: 16px system-ui, sans-serif; }
+      .label { fill: #1d4ed8; font: 700 14px system-ui, sans-serif; letter-spacing: .08em; }
+      .line { stroke: #2563eb; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .muted { stroke: #94a3b8; stroke-width: 2; fill: none; stroke-dasharray: 8 8; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1120" height="620"/>
+  <text class="label" x="70" y="76">CONTROL PLANE</text>
+  <rect class="accent" x="70" y="100" width="980" height="210"/>
+  <rect class="panel" x="120" y="150" width="280" height="110"/>
+  <text class="text" x="160" y="196">Opstage UI</text>
+  <text class="small" x="160" y="226">Inventory, actions, audit</text>
+  <rect class="panel" x="720" y="150" width="280" height="110"/>
+  <text class="text" x="758" y="196">Opstage Backend</text>
+  <text class="small" x="758" y="226">Fastify API + SQLite</text>
+  <path class="line" d="M 405 205 H 705"/>
+  <text class="small" x="505" y="190">same-origin API</text>
+
+  <text class="label" x="70" y="380">DATA PLANE</text>
+  <rect class="panel" x="120" y="410" width="280" height="110"/>
+  <text class="text" x="160" y="456">Capsule Service</text>
+  <text class="small" x="160" y="486">Worker, adapter, tool</text>
+  <rect class="panel" x="720" y="410" width="280" height="110"/>
+  <text class="text" x="760" y="456">Embedded Agent</text>
+  <text class="small" x="760" y="486">SDK heartbeat/report/poll</text>
+  <path class="line" d="M 405 465 H 705"/>
+  <text class="small" x="500" y="450">in-process SDK</text>
+  <path class="line" d="M 860 402 V 276"/>
+  <text class="small" x="878" y="350">outbound only</text>
+  <path class="muted" d="M 70 340 H 1050"/>
+  <text class="small" x="365" y="578">The backend never opens an inbound socket to customer services.</text>
+</svg>

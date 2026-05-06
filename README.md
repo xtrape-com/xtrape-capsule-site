@@ -8,7 +8,7 @@
 Public website and documentation for **Xtrape Capsule** — a lightweight control
 plane for AI-era Capsule Services.
 
-🌐 Live site: <https://xtrape-com.github.io/xtrape-capsule-site/>
+Live site: https://xtrape-com.github.io/xtrape-capsule-site/
 
 This is the public docs site. Source for the platform itself lives in:
 

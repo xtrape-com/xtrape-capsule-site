@@ -4,10 +4,7 @@ layout: home
 hero:
   name: Xtrape Capsule
   text: A lightweight control plane for AI-era Capsule Services.
-  tagline:
-    Connect small services, automation workers, integration adapters, background
-    jobs, private tools, and agent runtimes to a unified Opstage console through
-    an embedded Agent SDK.
+  tagline: Connect small services, automation workers, integration services, and agent runtimes to a unified Opstage console through an embedded Agent SDK.
   actions:
     - theme: brand
       text: Get Started

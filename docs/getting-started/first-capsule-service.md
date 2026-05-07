@@ -176,5 +176,13 @@ Every meaningful event is recorded:
 - `command.dispatched` (agent picked it up)
 - `command.completed` (agent reported success)
 
+::: tip Match versions across the four packages
+Pin matching `0.1.x` versions across `xtrape-capsule-ce`,
+`@xtrape/capsule-agent-node`, `@xtrape/capsule-contracts-node`, and
+`xtrape-capsule-demo`. During Public Review the npm packages live under the
+`public-review` dist-tag — see the [v0.1.0 release notes](../releases/v0.1.0)
+for the matching matrix.
+:::
+
 → Continue with [Node Embedded Agent](../agents/node-embedded-agent) for the
 full SDK surface.

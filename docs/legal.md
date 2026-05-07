@@ -28,6 +28,15 @@ If you have a question about a specific use, please open an issue on the relevan
 
 Opstage CE and the Agent SDK depend on a number of third-party open-source packages. Their licenses are preserved in the respective repositories' `NOTICE` and dependency manifests. The site itself is built with [VitePress](https://vitepress.dev/) (MIT) and uses [Vite](https://vitejs.dev/) (MIT) for the build pipeline.
 
+## Canonical language
+
+English is the **canonical language** of `xtrape-capsule-site` and of every
+specification it links to. Translations into other languages may be added
+over time; when an English statement and a translated statement disagree,
+the English statement is authoritative for both protocol and behavior. Any
+machine-assisted translation drafts in companion repositories are clearly
+marked as drafts and are not authoritative.
+
 ## Privacy
 
 This documentation site does not require sign-in, does not set tracking cookies, and does not collect personal information from visitors. Opstage CE itself runs entirely on infrastructure you control; what data it stores is described in [Security Overview](./security/overview).

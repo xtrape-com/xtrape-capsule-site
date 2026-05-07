@@ -36,16 +36,15 @@ In the Opstage console:
 ```bash
 mkdir my-capsule && cd my-capsule
 pnpm init
+pnpm add @xtrape/capsule-agent-node@public-review
 pnpm add -D typescript tsx @types/node
 ```
 
-::: warning SDK install path `@xtrape/capsule-agent-node` is **not yet published
-to npm**. Until the v0.1.0 Public Preview, link it from a local checkout of
-[`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node),
-or run your service from inside the
-[`xtrape-capsule-ce`](https://github.com/xtrape-com/xtrape-capsule-ce) workspace
-where the package is already wired up. After the package is published, the
-install command will be: :::
+::: tip Full runnable demo
+For a complete service with health, configs, search/list actions, row actions,
+and detail results, use
+[`xtrape-capsule-demo`](https://github.com/xtrape-com/xtrape-capsule-demo).
+:::
 
 `tsconfig.json`:
 
@@ -76,6 +75,11 @@ const agent = new CapsuleAgent({
   registrationToken: process.env.OPSTAGE_REGISTRATION_TOKEN,
   tokenStore: {
     file: process.env.OPSTAGE_AGENT_TOKEN_FILE ?? "./data/agent-token.txt",
+  },
+  agent: {
+    code: "my-capsule-agent",
+    name: "My Capsule Agent",
+    runtime: "nodejs",
   },
   service: {
     code: "my-capsule",
@@ -139,7 +143,7 @@ pnpm exec tsx src/main.ts
 On first start the agent:
 
 1. exchanges the registration token for an agent token,
-2. saves the agent token under `./data/agent-token.txt`,
+2. saves the issued credentials under `./data/agent-token.txt`,
 3. starts heartbeating and reporting `my-capsule`.
 
 ::: tip Subsequent restarts use the cached agent token. The registration token

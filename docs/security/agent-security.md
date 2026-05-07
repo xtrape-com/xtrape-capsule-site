@@ -12,9 +12,9 @@ A registration token is the bootstrap credential. After first start, the agent t
 
 ## Protect the agent token file
 
-The agent token file (`./data/agent-token.json` by default) is the long-lived credential.
+The agent token file (`./data/agent-token.txt` by default) is the long-lived credential.
 
-- Set restrictive permissions: `chmod 600 data/agent-token.json`.
+- Set restrictive permissions: `chmod 600 data/agent-token.txt`.
 - Mount the data dir on a host filesystem you control; avoid bind-mounting it into images you ship.
 - Treat its leak with the same severity as a vendor API key.
 

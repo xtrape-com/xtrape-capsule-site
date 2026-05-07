@@ -78,7 +78,7 @@ access to the service.
    plaintext token is returned to the agent **once**.
 
 5. **Agent persists the agent token.** Saved to a token file (e.g.
-   `./data/agent-token.json`). All subsequent calls (heartbeat, report, poll)
+   `./data/agent-token.txt`). All subsequent calls (heartbeat, report, poll)
    use this token.
 
 6. **Agent heartbeats.** Every ~30s the agent sends a heartbeat. If the backend

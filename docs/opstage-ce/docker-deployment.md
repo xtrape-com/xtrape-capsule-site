@@ -3,11 +3,9 @@
 Opstage CE is designed to run as a **single container** with a SQLite volume.
 This page covers the production-style deployment paths.
 
-::: warning Public images are not yet published The Docker image at
-`ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` is planned for the v0.1.0 Public
-Preview release. **Until then, build locally with the Compose path below.**
-Snippets that reference `ghcr.io/...` further down this page work only after the
-image is published. :::
+::: warning Public Review Docker path
+During Public Review, the source-build Docker Compose path remains the canonical deployment path. GHCR images may be produced from `main` for validation, but the stable `ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` image becomes the primary documented path only after the `v0.1.0 Public Preview` cut. Snippets that reference `ghcr.io/...` below are for that post-cut pinned-image path.
+:::
 
 ## Build and run from source (current path)
 
@@ -22,9 +20,9 @@ docker compose -f deploy/compose/docker-compose.yml up --build -d
 The compose file builds the image locally, mounts a `data` volume, and exposes
 port `8080`.
 
-## Single image (planned after publication)
+## Single image (after v0.1.0 cut)
 
-After public images are published, use a pinned release tag instead of `latest`.
+After the `v0.1.0 Public Preview` cut, use a pinned release tag.
 The expected shape is:
 
 ```bash
@@ -38,7 +36,7 @@ docker run -d \
   ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0
 ```
 
-## Docker Compose against a published image
+## Docker Compose against the pinned image
 
 ```yaml
 # docker-compose.yml

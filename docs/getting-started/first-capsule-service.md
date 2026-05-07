@@ -3,10 +3,9 @@
 This walks you through wiring a minimal Node.js Capsule Service into Opstage in
 about 10 minutes.
 
-::: info This guide targets the current `main` branch of
-[`xtrape-capsule-agent-node`](https://github.com/xtrape-com/xtrape-capsule-agent-node).
-When the SDK is published to npm as `@xtrape/capsule-agent-node` v0.1.x, this
-page will be pinned to a verified release. :::
+::: info Public Review package
+This guide uses `@xtrape/capsule-agent-node` from the `public-review` npm dist-tag. Pin an explicit prerelease version if you need reproducible builds during Public Review.
+:::
 
 ## What you'll build
 
@@ -176,7 +175,7 @@ Every meaningful event is recorded:
 - `command.dispatched` (agent picked it up)
 - `command.completed` (agent reported success)
 
-::: tip Match versions across the four packages
+::: tip Match CE, SDK, Contracts, and Demo versions
 Pin matching `0.1.x` versions across `xtrape-capsule-ce`,
 `@xtrape/capsule-agent-node`, `@xtrape/capsule-contracts-node`, and
 `xtrape-capsule-demo`. During Public Review the npm packages live under the

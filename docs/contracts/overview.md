@@ -35,4 +35,4 @@ Opstage CE and the Agent SDK declare a compatible contracts range; mismatches su
 
 ## Stability today
 
-Contracts are at v0.x while we stabilize Opstage CE. Frozen v1 is part of [Roadmap → v0.3 Capsule Spec](../roadmap).
+Contracts are at v0.x while we stabilize Opstage CE. Frozen v1 is part of [Roadmap → v0.3 Capsule Events and Capability Metadata](../roadmap).

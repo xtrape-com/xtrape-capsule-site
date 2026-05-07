@@ -5,7 +5,7 @@ Two supported install paths, in order of recommendation.
 ## 1. Docker Compose from source (recommended)
 
 See [Docker Deployment](../opstage-ce/docker-deployment) for the full reference.
-The current Public Preview preparation path builds the image locally:
+The current Public Review path builds the image locally:
 
 ```bash
 git clone https://github.com/xtrape-com/xtrape-capsule-ce
@@ -17,8 +17,9 @@ docker compose -f deploy/compose/docker-compose.yml up --build -d
 
 Open `http://localhost:8080`.
 
-::: info Public Docker images are planned for the v0.1.0 Public Preview release.
-This page will switch to a pinned GHCR tag after the image is published. :::
+::: info Public Review Docker path
+During Public Review, the source-build Docker Compose path remains the canonical install path. GHCR images may be produced from `main` for validation, but the stable `ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` image becomes the primary documented path only after the `v0.1.0 Public Preview` cut.
+:::
 
 ## 2. Local development (no Docker)
 

@@ -15,10 +15,10 @@ runtimes that connect to a single **Opstage** console through an embedded
 We're inviting **Public Review** before the `v0.1.0 Public Preview` release
 cut. This means:
 
-- The four public repositories are open and runnable.
+- The Public Review repositories are open and runnable.
 - Contracts and SDK packages are published to npm under the
   `public-review` dist-tag.
-- Docker images are built on every push to `main` and pushed to GHCR.
+- During Public Review, the source-build Docker Compose path is canonical. GHCR images may be produced from `main` for validation, but the stable `ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` image becomes the primary documented path only after the `v0.1.0 Public Preview` cut.
 - Documentation, README content, and deployment guides are stable enough
   to follow end-to-end.
 
@@ -78,14 +78,13 @@ We are particularly interested in feedback on:
 | `xtrape-capsule-demo` | matches | n/a |
 | `xtrape-capsule-site` | matches | n/a |
 
-Pin matching `0.1.x` minors across the four during Public Review.
+Pin matching `0.1.x` minors across CE, Agent SDK, Contracts, and Demo during Public Review.
 
 ## What changes between Public Review and Public Preview
 
 When the `v0.1.0 Public Preview` cut lands, expect:
 
-1. The npm `latest` dist-tag will start tracking the matching version
-   (today `latest` and `public-review` point at the same prerelease).
+1. The stable npm release path will start tracking the matching `v0.1.0` packages.
 2. The git tag `v0.1.0` and the GHCR image tag `0.1.0` will be promoted
    from the current pre-release artifacts.
 3. The site will switch [Quick Start](./getting-started/quick-start) and

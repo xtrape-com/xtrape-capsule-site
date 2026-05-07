@@ -147,8 +147,9 @@ docker compose -f deploy/compose/docker-compose.yml up --build -d
 
 Open `http://localhost:8080` and sign in with the bootstrap admin account.
 
-::: info Public Docker images are planned for the v0.1.0 Public Preview release;
-until then, build locally with the command above. :::
+::: info Public Review Docker path
+During Public Review, the source-build Docker Compose path remains the canonical quick-start path. GHCR images may be produced from `main` for validation, but the stable `ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` image becomes the primary documented path only after the `v0.1.0 Public Preview` cut.
+:::
 
 → [Full Quick Start guide](/getting-started/quick-start)
 

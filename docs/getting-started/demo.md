@@ -41,7 +41,7 @@ Then in another terminal, after creating a registration token in the UI:
 ```bash
 OPSTAGE_BACKEND_URL=http://localhost:8080 \
 OPSTAGE_REGISTRATION_TOKEN=opstage_reg_... \
-OPSTAGE_AGENT_TOKEN_FILE=./data/demo-agent-token.json \
+OPSTAGE_AGENT_TOKEN_FILE=./data/demo-agent-token.txt \
 pnpm --filter @xtrape/demo-capsule-service start
 ```
 

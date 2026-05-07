@@ -24,7 +24,7 @@ Every running agent is a distinct entity in Opstage with:
 
 - a stable `agentId`,
 - an agent token (issued at registration),
-- a hostname and SDK version (reported on register),
+- a hostname and SDK version (planned for v0.2 — not reported in v0.1),
 - a status: `ONLINE`, `OFFLINE`, `DISABLED`, or `REVOKED`.
 
 A single host can run multiple agents (e.g. one per service group); they each get their own `agentId`.

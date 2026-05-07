@@ -66,14 +66,15 @@ access to the service.
 
 2. **Agent boots with the registration token.** Typically passed as
    `OPSTAGE_REGISTRATION_TOKEN`. The agent posts it to
-   `POST /api/agents/register` along with hostname, agent SDK version, and
-   Capsule Service manifests.
+   `POST /api/agents/register` together with its agent identity (`code`,
+   `name`, `runtime`) and the initial Capsule Service manifest. Hostname and
+   SDK version are planned for v0.2 and are not reported in v0.1.
 
 3. **Backend validates the token.** Looks up the token by hash, checks
    `expiresAt`, `revokedAt`, and remaining uses. If invalid → `401`.
 
 4. **Backend issues an agent token.** A new agent record is created. A fresh
-   agent token (`opstage_agt_...`) is generated, hashed, and stored. The
+   agent token (`opstage_agent_...`) is generated, hashed, and stored. The
    plaintext token is returned to the agent **once**.
 
 5. **Agent persists the agent token.** Saved to a token file (e.g.

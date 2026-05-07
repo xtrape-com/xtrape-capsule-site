@@ -15,7 +15,7 @@ The **Capsule Management Contract** is the wire-level agreement between an Agent
 ## Payload shape (high-level)
 
 ```text
-register   →  { hostname, sdkVersion, services[] }
+register   →  { agent: { code, name?, mode, runtime? }, service?: ReportedService }
 heartbeat  →  { timestamp }
 services   →  { agentId, services: [ { code, name, version, healthStatus, configs[], actions[] } ] }
 commands   →  { commands: [ { id, type, serviceCode, action, payload, expiresAt } ] }

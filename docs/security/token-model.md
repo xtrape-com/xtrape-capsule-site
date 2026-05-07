@@ -7,7 +7,7 @@ Opstage uses two token types and one cookie. Understanding the difference is the
 | Credential | Used by | Lifetime | Storage on backend |
 | --- | --- | --- | --- |
 | **Registration token** (`opstage_reg_...`) | An Agent during first start | Short, single-use (configurable) | SHA-256 hash only |
-| **Agent token** (`opstage_agt_...`) | An Agent for every subsequent call | Long-lived, revocable | SHA-256 hash only |
+| **Agent token** (`opstage_agent_...`) | An Agent for every subsequent call | Long-lived, revocable | SHA-256 hash only |
 | **Session cookie** | The Admin UI | Default 8h, sliding | Server-side session record |
 
 ## Registration token

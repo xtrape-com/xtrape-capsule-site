@@ -16,7 +16,7 @@ A short-lived, single-use credential the operator hands to a new agent.
 
 - Generated in the Opstage UI; **the plaintext value is shown exactly once**.
 - Stored in the database **only as a SHA-256 hash**.
-- Has `expiresAt` and a remaining-uses counter.
+- Has an optional `expiresAt`. v0.1 treats every registration token as **single-use**: the first successful register call marks it `USED` and a second register attempt with the same token fails.
 - Can be revoked at any time from the UI; revoked tokens fail with `REGISTRATION_TOKEN_REVOKED`.
 - Used by the agent **once**, against `POST /api/agents/register`, to obtain an agent token.
 

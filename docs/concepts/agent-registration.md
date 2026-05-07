@@ -71,7 +71,7 @@ access to the service.
    SDK version are planned for v0.2 and are not reported in v0.1.
 
 3. **Backend validates the token.** Looks up the token by hash, checks
-   `expiresAt`, `revokedAt`, and remaining uses. If invalid → `401`.
+   `expiresAt`, `revokedAt`, and the single-use status flag. If invalid → `401`.
 
 4. **Backend issues an agent token.** A new agent record is created. A fresh
    agent token (`opstage_agent_...`) is generated, hashed, and stored. The

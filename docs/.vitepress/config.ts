@@ -35,10 +35,11 @@ export default defineConfig({
       { text: "Versions", link: "/version-compatibility" },
       { text: "Troubleshooting", link: "/troubleshooting" },
       {
-        text: "v0.1",
+        text: "Releases",
         items: [
-          { text: "Public Review", link: "/public-review-announcement" },
-          { text: "Release notes", link: "/releases/v0.1.0" },
+          { text: "v0.2 (draft)", link: "/releases/v0.2.0" },
+          { text: "v0.1 release notes", link: "/releases/v0.1.0" },
+          { text: "v0.1 Public Review", link: "/public-review-announcement" },
         ],
       },
       {

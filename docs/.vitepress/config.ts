@@ -127,6 +127,7 @@ export default defineConfig({
               text: "Node Embedded Agent",
               link: "/agents/node-embedded-agent",
             },
+            { text: "Lifecycle", link: "/agents/lifecycle" },
             { text: "Action Model", link: "/agents/action-model" },
             { text: "Health Reporting", link: "/agents/health-reporting" },
             { text: "Config Reporting", link: "/agents/config-reporting" },

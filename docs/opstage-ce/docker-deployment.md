@@ -3,10 +3,10 @@
 Opstage CE is designed to run as a **single container** with a SQLite volume.
 This page covers the production-style deployment paths.
 
-::: warning Public Preview Docker path
-Through `v0.2 rc.1`, the source-build Docker Compose path remains the
-canonical deployment path. The CE workflow publishes the following GHCR
-tags (see `.github/workflows/docker-publish.yml`):
+::: tip Public Preview Docker path
+For v0.2 Public Preview, `ghcr.io/xtrape-com/xtrape-capsule-ce:0.2.0`
+is the primary documented image. The CE workflow publishes the
+following GHCR tags (see `.github/workflows/docker-publish.yml`):
 
 - on each `v*` git tag — `:<semver>` (e.g. `0.2.0`) and `:<major>.<minor>` (e.g. `0.2`);
 - on every `main` push — `:edge`, `:main`, and `:sha-<long>`.
@@ -14,9 +14,6 @@ tags (see `.github/workflows/docker-publish.yml`):
 It intentionally does **not** publish `latest`. Operators should always pin
 to a semver tag for reproducible deployments; the `edge` and `sha-*` tags
 are for experimentation and exact-commit pinning only.
-
-After the `v0.2.0` cut, `ghcr.io/xtrape-com/xtrape-capsule-ce:0.2.0`
-becomes the primary documented image.
 :::
 
 ## Build and run from source (current path)

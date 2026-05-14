@@ -1,10 +1,18 @@
 # Version compatibility
 
 This page is the authoritative cross-package matrix during Public Review
-and Public Preview. Pin matching `0.1.x` versions across the four
-packages.
+and Public Preview.
 
-## v0.1 Public Review (current)
+**The general rule:** pin matching **minor** versions of `xtrape-capsule-ce`,
+`@xtrape/capsule-agent-node`, `@xtrape/capsule-contracts-node`, and
+`xtrape-capsule-demo`. Mixing minors across packages is not a supported path.
+
+Currently active lines:
+
+- [`v0.1` — Public Review](#v0-1-public-review)
+- [`v0.2` — Public Preview (release candidate)](#v0-2-public-preview-release-candidate)
+
+## v0.1 Public Review {#v0-1-public-review}
 
 | Package | Version | Distribution | Where it runs |
 | --- | --- | --- | --- |
@@ -28,20 +36,57 @@ pnpm add @xtrape/capsule-agent-node@public-review \
          zod
 ```
 
-## v0.2 Public Preview (planned)
+## v0.2 Public Preview (release candidate) {#v0-2-public-preview-release-candidate}
 
-When the `v0.2.0 Public Preview` cut lands, the table shifts to:
+Release-candidate cut on the `v0.2` branches; final `0.2.0` tag pending the
+release-train review checklist. Track the open PRs:
+[CE #16](https://github.com/xtrape-com/xtrape-capsule-ce/pull/16),
+[agent-node #7](https://github.com/xtrape-com/xtrape-capsule-agent-node/pull/7),
+[contracts-node #9](https://github.com/xtrape-com/xtrape-capsule-contracts-node/pull/9).
 
-| Package | Version | Distribution |
+| Package | RC version | Distribution |
 | --- | --- | --- |
-| `xtrape-capsule-ce` | `0.2.0` | GHCR image `ghcr.io/xtrape-com/xtrape-capsule-ce:0.2.0` becomes the primary documented path; source build remains supported |
-| `@xtrape/capsule-agent-node` | `0.2.0` | npm `latest` (still also tagged on the rolling stream during transition) |
-| `@xtrape/capsule-contracts-node` | `0.2.0` | npm `latest` |
-| `xtrape-capsule-demo` | matches `0.2.x` | source clone, optional GHCR image |
+| `xtrape-capsule-ce` | `0.2.0-rc.1` | source build from `v0.2` branch; final cut will publish `ghcr.io/xtrape-com/xtrape-capsule-ce:0.2.0` (and `:0.2` minor alias) |
+| `@xtrape/capsule-agent-node` | `0.2.0-rc.1` | npm `next` dist-tag during rc; `latest` after final cut |
+| `@xtrape/capsule-contracts-node` | `0.2.0-rc.1` | npm `next` dist-tag during rc; `latest` after final cut |
+| `xtrape-capsule-demo` | not bumped in this cut | source clone; demo still pins to `0.1.x` and is scheduled to update in v0.3 |
 | `xtrape-capsule-site` | matches | this site |
 
-Do not mix `0.1.x` and `0.2.x` across the four packages; the wire protocol
-may still add fields between v0.1 and v0.2.
+The wire schemas in `@xtrape/capsule-contracts-node@0.2.x` are unchanged
+from `0.1.x` — existing `0.1.x` agents continue to validate against a
+`0.2.x` backend — but the **recommended supported path** is matching
+`0.2.x` across the published packages. Don't document mixed `0.1.x` /
+`0.2.x` usage.
+
+### Recommended install (rc)
+
+```bash
+# CE backend + UI — source build from the v0.2 branch during rc
+git clone --branch v0.2 https://github.com/xtrape-com/xtrape-capsule-ce.git
+cd xtrape-capsule-ce
+docker compose -f deploy/compose/docker-compose.yml up --build -d
+
+# Agent SDK + Contracts — rc on the next dist-tag
+pnpm add @xtrape/capsule-agent-node@next \
+         @xtrape/capsule-contracts-node@next \
+         zod
+```
+
+After the final `0.2.0` cut, install switches to:
+
+```bash
+# CE backend + UI — pinned semver tag
+docker pull ghcr.io/xtrape-com/xtrape-capsule-ce:0.2.0
+
+# Agent SDK + Contracts — npm latest
+pnpm add @xtrape/capsule-agent-node@^0.2.0 \
+         @xtrape/capsule-contracts-node@^0.2.0 \
+         zod
+```
+
+The CE Docker workflow does **not** publish a `latest` tag. Always pin
+to a semver tag (`0.2.0`, `0.2`) for reproducible deployments; use
+`edge` only for experimentation against `main`.
 
 ## Wire protocol stability
 

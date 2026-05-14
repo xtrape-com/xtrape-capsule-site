@@ -49,7 +49,7 @@ release-train review checklist. Track the open PRs:
 | `xtrape-capsule-ce` | `0.2.0-rc.1` | source build from `v0.2` branch; final cut will publish `ghcr.io/xtrape-com/xtrape-capsule-ce:0.2.0` (and `:0.2` minor alias) |
 | `@xtrape/capsule-agent-node` | `0.2.0-rc.1` | npm `next` dist-tag during rc; `latest` after final cut |
 | `@xtrape/capsule-contracts-node` | `0.2.0-rc.1` | npm `next` dist-tag during rc; `latest` after final cut |
-| `xtrape-capsule-demo` | not bumped in this cut | source clone; demo still pins to `0.1.x` and is scheduled to update in v0.3 |
+| `xtrape-capsule-demo` | `0.2.0-rc.1` | source clone; tracks the v0.2 train via [demo PR #14](https://github.com/xtrape-com/xtrape-capsule-demo/pull/14) |
 | `xtrape-capsule-site` | matches | this site |
 
 The wire schemas in `@xtrape/capsule-contracts-node@0.2.x` are unchanged

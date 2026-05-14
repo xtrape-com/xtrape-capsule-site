@@ -124,6 +124,60 @@ The agent maintains a long-poll against `GET /api/agents/commands` and
 dispatches incoming commands to the registered action handlers. You don't have
 to manage the polling loop yourself — `agent.start()` runs it for you.
 
+## Typed errors
+
+Since v0.2 the SDK throws **typed** error subclasses for failures that need
+operator action, so callers can `instanceof`-branch instead of parsing
+messages:
+
+```ts
+import {
+  CapsuleAgent,
+  RegistrationError,
+  AgentAuthError,
+  NetworkError,
+} from "@xtrape/capsule-agent-node";
+
+try {
+  await agent.start();
+} catch (err) {
+  if (err instanceof RegistrationError) {
+    // Registration token invalid / single-use / expired.
+    // Not retried — operator must mint a fresh token.
+  } else if (err instanceof AgentAuthError) {
+    // Persisted agent token was revoked.
+    // Delete the token file, then start with a fresh registration token.
+  } else if (err instanceof NetworkError) {
+    // Transport-level failure. The SDK already retried inside its
+    // backoff budget; this rethrow signals "give up at the caller".
+  } else {
+    throw err;
+  }
+}
+```
+
+`RegistrationError` and `AgentAuthError` are **non-retryable** — the SDK
+throws them straight through. `NetworkError` is **retryable** and is what
+the internal backoff already iterates over before surfacing.
+
+## Structured logging
+
+The SDK accepts an optional `onLog` sink that receives structured records
+instead of pre-formatted console lines. Records carry `level`, `event`,
+`context`, and `data` fields suitable for piping into a log aggregator:
+
+```ts
+const agent = new CapsuleAgent({
+  // ...
+  onLog: (record) => {
+    process.stdout.write(JSON.stringify(record) + "\n");
+  },
+});
+```
+
+When `onLog` is not supplied the SDK falls back to the existing
+console-shaped sink, so this is a pure addition — no breaking change.
+
 ## Security notes
 
 - Treat the registration token like a one-time secret. After first start, **do

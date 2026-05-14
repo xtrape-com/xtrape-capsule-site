@@ -32,11 +32,14 @@ export default defineConfig({
       { text: "Use Cases", link: "/use-cases/integration-services" },
       { text: "Editions", link: "/editions/ce" },
       { text: "Roadmap", link: "/roadmap" },
+      { text: "Versions", link: "/version-compatibility" },
+      { text: "Troubleshooting", link: "/troubleshooting" },
       {
-        text: "v0.1",
+        text: "Releases",
         items: [
-          { text: "Public Review", link: "/public-review-announcement" },
-          { text: "Release notes", link: "/releases/v0.1.0" },
+          { text: "v0.2 (draft)", link: "/releases/v0.2.0" },
+          { text: "v0.1 release notes", link: "/releases/v0.1.0" },
+          { text: "v0.1 Public Review", link: "/public-review-announcement" },
         ],
       },
       {
@@ -124,6 +127,7 @@ export default defineConfig({
               text: "Node Embedded Agent",
               link: "/agents/node-embedded-agent",
             },
+            { text: "Lifecycle", link: "/agents/lifecycle" },
             { text: "Action Model", link: "/agents/action-model" },
             { text: "Health Reporting", link: "/agents/health-reporting" },
             { text: "Config Reporting", link: "/agents/config-reporting" },

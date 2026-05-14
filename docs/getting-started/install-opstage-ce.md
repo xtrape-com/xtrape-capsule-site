@@ -17,8 +17,13 @@ docker compose -f deploy/compose/docker-compose.yml up --build -d
 
 Open `http://localhost:8080`.
 
-::: info Public Review Docker path
-During Public Review, the source-build Docker Compose path remains the canonical install path. GHCR images may be produced from `main` for validation, but the stable `ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` image becomes the primary documented path only after the `v0.1.0 Public Preview` cut.
+::: info Pinned Docker tag for v0.2 Public Preview
+The primary documented install is
+`ghcr.io/xtrape-com/xtrape-capsule-ce:0.2.0` — see
+[Docker Deployment](../opstage-ce/docker-deployment) for the full set
+of tags the CE workflow publishes (`:<semver>`, `:<major>.<minor>`,
+`:edge`, `:main`, `:sha-<long>`). The workflow does **not** publish
+`latest`; always pin to a semver tag for reproducible deployments.
 :::
 
 ## 2. Local development (no Docker)

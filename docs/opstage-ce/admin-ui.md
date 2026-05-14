@@ -32,6 +32,14 @@ When you click **Run** on a service action:
 3. Submitting issues `POST` on the same URL, which creates an `ACTION_EXECUTE` command.
 4. The command status streams into the modal until it terminates (`SUCCEEDED` / `FAILED` / `CANCELLED`).
 
+### One-time generated keys
+
+Some actions emit a `generatedKey` (a freshly minted API key, OTP, registration token, etc.). For these, the secret is **shown once** in the action-result panel — the modal highlights it in a yellow alert with a copy button.
+
+On every subsequent fetch of the same command, the backend returns `"[REDACTED]"` in its place. This is intentional: the plaintext lives in an in-memory ephemeral cache (default TTL: 5 minutes) that survives only on the originating process. If the operator dismisses the panel without copying, the key is unrecoverable and the action must be re-run.
+
+See the CE design note [`docs/adr/0001-ephemeral-action-secrets.md`](https://github.com/xtrape-com/xtrape-capsule-ce/blob/main/docs/adr/0001-ephemeral-action-secrets.md) for the threat model and storage rationale.
+
 ## Internationalization
 
 The console ships with `en-US` and `zh-CN`. The selected language is stored in `localStorage` under `opstage.language`. No session data is stored in `localStorage` or `sessionStorage`.

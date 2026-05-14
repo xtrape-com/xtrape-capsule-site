@@ -58,36 +58,45 @@ Two unauthenticated endpoints expose operator-facing process metadata.
 They were spelled in the v0.1 contract but only fully materialized in
 v0.2 (SQLite round-trip probe, OCI labels, build commit/timestamp).
 
+All admin / system JSON endpoints below return the standard
+`{ "success": true, "data": { ... } }` envelope. Schemas show only the
+`data` payload.
+
 ### `GET /api/system/health`
 
-```json
+```jsonc
 {
-  "status": "ok",
-  "uptimeSeconds": 123456,
+  "status": "UP",            // "UP" | "DEGRADED" | "DOWN"
+  "timestamp": "2026-05-14T12:34:56Z",
   "version": "0.2.0",
   "edition": "ce",
-  "database": { "status": "ok", "latencyMs": 1 }
+  "database": {
+    "status": "UP",          // "UP" | "DEGRADED" | "DOWN"
+    "kind": "sqlite",
+    "latencyMs": 1
+  },
+  "uptimeSeconds": 123456
 }
 ```
 
-`status` is `"ok"` iff the SQLite probe round-trips; otherwise `"degraded"` with `database.status: "error"`. Probes are cheap (a `SELECT 1`) and safe to scrape on a 10s+ cadence.
+`status` follows `database.status`: the SQLite probe round-trips fast → `UP`; over 250 ms → `DEGRADED`; throws → `DOWN`. Probes are cheap (a `SELECT 1`) and safe to scrape on a 10s+ cadence.
 
 ### `GET /api/system/version`
 
-```json
+```jsonc
 {
-  "version": "0.2.0",
+  "version": "0.2.0",        // build-injected OPSTAGE_VERSION, or "0.2.0-dev" in pnpm dev
   "edition": "ce",
-  "commit": "0c7ab99",
-  "buildTimestamp": "2026-05-13T11:08:47Z"
+  "commit": "0c7ab99...",    // OPSTAGE_COMMIT; undefined in pnpm dev
+  "buildTime": "2026-05-13T11:08:47Z"  // OPSTAGE_BUILD_TIME; undefined in pnpm dev
 }
 ```
 
-`commit` and `buildTimestamp` are baked into the Docker image at build time via OCI labels (`org.opencontainers.image.revision`, `org.opencontainers.image.created`). When CE runs from source they fall back to `"dev"` and the process start time.
+`commit` and `buildTime` are baked into the Docker image at build time via OCI labels (`org.opencontainers.image.revision`, `org.opencontainers.image.created`). When CE runs from source they pass through as `undefined`, and `version` falls back to `"0.2.0-dev"` so a local dev box is never mistaken for a tagged release.
 
 ## Admin metrics endpoint (v0.2+)
 
-`GET /api/admin/metrics` (owner-only) reports operational counters and timings used by the SettingsPage diagnostics card. v0.2 enriches the shape with command-duration percentiles, top error codes, and stale-agent counts:
+`GET /api/admin/metrics` (owner-only) reports operational counters and timings used by the SettingsPage diagnostics card. v0.2 enriches the shape with command-duration percentiles, top error codes, and a stale-agent counter:
 
 ```jsonc
 {
@@ -96,28 +105,38 @@ v0.2 (SQLite round-trip probe, OCI labels, build commit/timestamp).
     "commandsDispatched": 482,
     "commandsCompleted": 461,
     "commandsFailed": 21,
+    "actionPrepareRequested": 480,
     "actionPrepareTimeouts": 0,
     "actionPrepareFailures": 2,
-    "oversizedCommandResultsRejected": 0
+    "oversizedCommandResultsRejected": 0,
+    "staleOnlineAgents": 0
   },
   "commandDurations": {
-    "p50Ms": 240, "p95Ms": 1820, "maxMs": 7400, "meanMs": 410,
-    "sampleSize": 461
+    "sampleSize": 461,        // rolling window of the last 1000 completed commands
+    "p50Ms": 240,
+    "p95Ms": 1820,
+    "maxMs": 7400,
+    "meanMs": 410
   },
-  "topErrorCodes": [
+  "topCommandErrors": [
     { "code": "ACTION_FAILED", "count": 12 },
     { "code": "ACTION_PREPARE_TIMEOUT", "count": 6 }
   ],
-  "agents": {
-    "total": 8,
-    "online": 7,
-    "offline": 1,
-    "stale": 0
-  }
+  "byStatus": {
+    "agents":             { "ONLINE": 7, "OFFLINE": 1 },
+    "capsuleServices":    { "HEALTHY": 5, "UNHEALTHY": 1 },
+    "registrationTokens": { "ACTIVE": 1, "USED": 4 },
+    "commands":           { "SUCCEEDED": 461, "FAILED": 21 }
+  },
+  "totals": {
+    "users": 3, "agents": 8, "capsuleServices": 6,
+    "registrationTokens": 5, "commands": 503, "auditEvents": 9821
+  },
+  "workspace": { /* workspace identity */ }
 }
 ```
 
-Numeric counters use the same names the agent code emits to the in-memory metrics registry; `commandDurations.sampleSize` reflects the rolling window the backend keeps, not the full audit history.
+`commandDurations.sampleSize` reflects a bounded window (the last 1000 commands with both `startedAt` and `completedAt`), not the full audit history — the endpoint is meant to stay cheap on long-running CE instances. `operational.staleOnlineAgents` counts agents whose row says `ONLINE` but whose `lastHeartbeatAt` is older than `OPSTAGE_AGENT_OFFLINE_THRESHOLD_SECONDS`; if non-zero, the maintenance sweep hasn't run recently. `byStatus.agents` carries the underlying row status (`ONLINE` / `OFFLINE` / etc.); operator-facing `effectiveStatus` for individual services is computed at query time on the services endpoint, not summarised here.
 
 ## Versioning
 

@@ -15,7 +15,7 @@ Operators end up with 10–50 of them and no good way to answer "which one is up
 
 Make each integration service a Capsule Service:
 
-- Embed the Node Agent.
+- Embed the Node.js Embedded Agent SDK.
 - Report version + pinned model + upstream URL via [config reporting](../agents/config-reporting).
 - Expose a `rotateKey` action with a confirmation gate.
 - Expose a `runHealthCheck` action that calls the upstream.

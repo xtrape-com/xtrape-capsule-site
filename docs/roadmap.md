@@ -112,9 +112,9 @@ OpHub Self Service:
 ### Tracking
 
 - [xtrape-capsule-ophub-go#1](https://github.com/xtrape-com/xtrape-capsule-ophub-go/issues/1) - OpHub Runtime implementation
-- [xtrape-capsule-contracts-node#12](https://github.com/xtrape-com/xtrape-capsule-contracts-node/issues/12) - Protocol contracts for v0.3
+- [xtrape-capsule-contracts-node#10](https://github.com/xtrape-com/xtrape-capsule-contracts-node/issues/10) - Protocol contracts for v0.3
 - [xtrape-capsule-agent-node#8](https://github.com/xtrape-com/xtrape-capsule-agent-node/issues/8) - Node.js Embedded Agent SDK
-- [xtrape-capsule-demo#5](https://github.com/xtrape-com/xtrape-capsule-demo/issues/5) - Reference demo implementation
+- [xtrape-capsule-demo#8](https://github.com/xtrape-com/xtrape-capsule-demo/issues/8) - Reference demo implementation
 
 > **Note**: Capsule Bus (real-time event streaming) is not implemented in v0.3.
 > Event metadata is design-only and prepares the contract surface for future work.

@@ -98,6 +98,10 @@ export default defineConfig({
               text: "Management Contract",
               link: "/concepts/management-contract",
             },
+            {
+              text: "Capsule Bus (Experimental)",
+              link: "/concepts/capsule-bus",
+            },
           ],
         },
       ],

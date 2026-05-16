@@ -11,7 +11,7 @@ Xtrape Capsule is shipped in incremental milestones. We avoid promising specific
 
 ## Current status
 
-**v0.1 Public Review Foundation** is the current Public Review / pre-`v0.1.0 Public Preview` milestone. It validates Opstage CE, the Node Agent SDK, Contracts, Demo, and public docs end-to-end for local evaluation, small private deployments, demo Capsule Services, and early integration experiments. It is not recommended for business-critical HA production.
+**v0.4 Capsule Bus Experimental** is the active experimental milestone on the v0.4 branch. It validates Opstage CE, the Node Agent SDK, Contracts, Demo, and public docs end-to-end for local evaluation, small private deployments, demo Capsule Services, and early integration experiments. It is not recommended for business-critical HA production.
 
 During Public Review, the source-build Docker Compose path remains the canonical quick-start path. GHCR images may be produced from `main` for validation, but the stable `ghcr.io/xtrape-com/xtrape-capsule-ce:0.1.0` image becomes the primary documented path only after the `v0.1.0 Public Preview` cut.
 
@@ -26,7 +26,7 @@ During Public Review, the source-build Docker Compose path remains the canonical
 - **v0.7 Private Capsule Marketplace** — internal/private marketplace workflows for package approval, install requests, and governance.
 - **v1.0 CE Stable and Ecosystem Foundation** — stable CE deployment, stable contracts/SDK, upgrade path, and ecosystem baseline.
 
-Catalog, Registry, Marketplace, Capsule Bus, and AI-assisted governance are future roadmap items. They are not implemented in the current Public Review build.
+Catalog, Registry, Marketplace, and AI-assisted governance remain future roadmap items. Capsule Bus is experimental in v0.4 and should not be presented as stable.
 
 ## v0.1 — Public Review Foundation
 
@@ -88,16 +88,21 @@ Catalog, Registry, Marketplace, Capsule Bus, and AI-assisted governance are futu
 
 ## v0.4 — Capsule Bus Experimental
 
-**Status:** Future · Experimental
+**Status:** Experimental
 
 **Scope**
 
-- Governed event-to-command routing for controlled service coordination
-- Operator-visible routing and audit foundations
-- Experimental guardrails for service-to-service coordination
+- Experimental event envelope and route-rule contracts
+- CE event ingestion, route storage, diagnostics, and audit records
+- Event-to-command routing from `eventType` plus optional `sourceServiceCode` to target service/action commands
+- OpHub forwarding from optional local adapter `GET /capsule/bus/events`
+- Embedded Agent `publishBusEvent()` hook for controlled trials
+- Demo adapter endpoint for a minimal event example
 
 **Not included**
 
+- Stable public API guarantees before v1.0
+- Workflow engine, service mesh, or broker replacement semantics
 - Public marketplace or registry workflows
 
 ## v0.5 — Capsule Catalog
